@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword" content="">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-person-128.png">
+    <link rel="alternate" type="application/atom+xml" title="Hexo" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        前端进阶｜undefined
+        
+    </title>
+
+    <link rel="canonical" href="http://shouzhiyo.github.io/2020/05/01/前端进阶/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/blog-style.css">
+
+
+    <!-- Pygments Github CSS -->
+    
+<link rel="stylesheet" href="/css/syntax.css">
+
+<meta name="generator" content="Hexo 5.1.1"></head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    Hexo
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>前端进阶</h1>
+                    
+                    <span class="meta">
+                         作者 John Doe
+                        <span>
+                          日期 2020-05-01
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            前端进阶
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <div id="article_content" class="article_content clearfix">
+            <link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/template/css/ck_htmledit_views-3d4dc5c1de.css">
+                            <div id="content_views" class="markdown_views prism-atom-one-dark">
+                    <!-- flowchart 箭头图标 勿删 -->
+                    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+                        <path stroke-linecap="round" d="M5,0 0,2.5 5,5z" id="raphael-marker-block" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+                    </svg>
+                                            <p>我们知道，前端的基础无非就是：HTML+CSS+JS(jquery)+UI框架+…<br>
+从现在开始，我们要学习进阶的前端技术，内容包括VSCode的使用、Node.js、ES6语法、NPM、Babel、模块化和Webpack。</p>
+<h2><a name="t0"></a><a name="t0"></a><a id="VSCode_3"></a>VSCode的使用</h2>
+<p>VSCode是一个前端的代码编辑器，非常受前端开发者的青睐。我们先来学习一下它的安装和使用方法。<br>
+1、从官网上下载VSCode，下载地址： <a target="_blank" href="https://code.visualstudio.com/" rel="nofollow noopener">https://code.visualstudio.com/</a></p>
+<p>2、启动安装程序，一直点下一步即可，安装完成后会发现是英文界面。<br>
+3、安装中文插件，在如下图所示位置搜索第一个插件即可。<br>
+<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8xMTQwNTU1OC1kMzFlYzAyMTI2MGUxMTJjLnBuZw?x-oss-process=image/format,png" alt="搜索安装中文插件"><br>
+4、安装完插件重启软件界面即可显示中文。<br>
+5、还有以下插件需要进行安装：<code>ESLint</code>、<code>Live Server</code>、<code>Node.js Modules Intellisense</code>、<code>Vetur</code>、<code>VueHelper</code><br>
+<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8xMTQwNTU1OC1hYjVkNjVlYmMxZWZlZjFiLnBuZw?x-oss-process=image/format,png" alt="要下载的插件"></p>
+<h2><a name="t1"></a><a name="t1"></a><a id="Nodejs_15"></a>Node.js</h2>
+<blockquote>
+<p>什么是Node.js？</p>
+</blockquote>
+<p>Node.js是一个让JavaScript运行在服务端的开发平台，它让JavaScript 成为与Php、Python、Perl、Ruby等服务端语言平起平坐的脚本语言。<br>
+也就是说，以前编写JavaScript代码需要从浏览器执行，它是放在HTML中的。Node.js就是可以在服务器端运行的JavaScript代码，它基于Coogle 的V8引擎，可以脱离浏览器执行JavaScript代码，其性能较好。</p>
+<blockquote>
+<p>安装Python</p>
+</blockquote>
+<p>安装Node.js之前我们需要先安装以下Python，建议安装Python2版本的，Python3可能会出现一些兼容性问题，这里安装的是Python2.7版本。安装完成后会自动把Python安装目录栏添加到环境变量中，可以在DOS窗口中输入<code>python -v</code>命令查看Python版本，有显示Python安装和版本信息表示安装成功。</p>
+<blockquote>
+<p>安装Node.js</p>
+</blockquote>
+<p>进入官网，下载安装包，一直点下一步即可。下载地址：<a target="_blank" href="https://nodejs.org/zh-cn/download/" rel="nofollow noopener">https://nodejs.org/zh-cn/download/</a></p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8xMTQwNTU1OC1iZjQ1ODA1MTMyMjQ3YzJmLnBuZw?x-oss-process=image/format,png" alt="下载Node.js"><br>
+如下图所示，Node.js自动帮我们配置了环境变量。<br>
+<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8xMTQwNTU1OC1iM2Q4YzA1ZWMyMGIwMjMxLnBuZw?x-oss-process=image/format,png" alt="环境变量"><br>
+安装完毕后，可以输入如下来确认Node.js和npm环境是否安装成功了。</p>
+<pre class="prettyprint"><code class="has-numbering" onclick="mdcp.copyCode(event)" style="position: unset;"> #查看Node.js版本
+node -v 
+<div class="hljs-button &#123;2&#125;" data-title="复制"></div></code><ul class="pre-numbering"><li style="color: rgb(153, 153, 153);">1</li><li style="color: rgb(153, 153, 153);">2</li></ul></pre>
+<pre class="prettyprint"><code class="has-numbering" onclick="mdcp.copyCode(event)" style="position: unset;">#查看npm版本
+npm -v 
+<div class="hljs-button &#123;2&#125;" data-title="复制"></div></code><ul class="pre-numbering"><li style="color: rgb(153, 153, 153);">1</li><li style="color: rgb(153, 153, 153);">2</li></ul></pre>
+<p>简单使用一下npm，例如我们可以输入如下命令来下载插件，以Vue为例。</p>
+<pre class="prettyprint"><code class="has-numbering" onclick="mdcp.copyCode(event)" style="position: unset;">npm install vue
+<div class="hljs-button &#123;2&#125;" data-title="复制"></div></code><ul class="pre-numbering"><li style="color: rgb(153, 153, 153);">1</li></ul></pre>
+<blockquote>
+<p>简单使用一下Node.js</p>
+</blockquote>
+<p>在VSCode中，主要可以分为文件列表和代码编辑区两个区域。<br>
+<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8xMTQwNTU1OC0wYjQxZjRiYjQxZTc0M2Q1LnBuZw?x-oss-process=image/format,png" alt="VSCode界面"><br>
+1、点击文件列表区域“代码”右侧第二个图标，创建文件夹<code>nodejs</code>。<br>
+2、点击文件列表区域“代码”右侧第一个图标，在nodejs文件夹下创建<code>01-控制台程序.js文件</code>。简单编写以下代码：</p>
+<pre class="prettyprint"><code class="has-numbering" onclick="mdcp.copyCode(event)" style="position: unset;">console.log("hello,node.js")
+<div class="hljs-button &#123;2&#125;" data-title="复制"></div></code><ul class="pre-numbering"><li style="color: rgb(153, 153, 153);">1</li></ul></pre>
+<p>3、点击文件，右键选择<code>在终端中打开</code>，底部弹出终端界面。<br>
+4、在终端中输入如下命令运行js程序。</p>
+<pre class="prettyprint"><code class="has-numbering" onclick="mdcp.copyCode(event)" style="position: unset;">node js文件名     
+<div class="hljs-button &#123;2&#125;" data-title="复制"></div></code><ul class="pre-numbering"><li style="color: rgb(153, 153, 153);">1</li></ul></pre>
+<blockquote>
+<p>Node.js服务器端开发（了解）</p>
+</blockquote>
+<p>1、创建<code>02-server-app.js</code>，编写如下代码：</p>
+<pre class="prettyprint"><code class="has-numbering" onclick="mdcp.copyCode(event)" style="position: unset;">const http = require('http') 
+http.createServer(function (request, response) &#123;
+  //设置请求头的内容类型
+  response.writeHead(200, &#123; 'Content-Type': 'text/plain' &#125;)   
+  //输出“hello,node server”
+  response.end('hello,node server') 
+&#125;).listen(8080) //监听8080端口
+console.log("Server running at http://localhost:8080")
+<div class="hljs-button &#123;2&#125;" data-title="复制"></div></code><ul class="pre-numbering"><li style="color: rgb(153, 153, 153);">1</li><li style="color: rgb(153, 153, 153);">2</li><li style="color: rgb(153, 153, 153);">3</li><li style="color: rgb(153, 153, 153);">4</li><li style="color: rgb(153, 153, 153);">5</li><li style="color: rgb(153, 153, 153);">6</li><li style="color: rgb(153, 153, 153);">7</li><li style="color: rgb(153, 153, 153);">8</li></ul></pre>
+<p>2、在终端中输入命令<code>node 02-server-app.js</code>运行程序，打开浏览器访问http://localhost:8080，在网页中输出了"hello,node server"。</p>
+<h2><a name="t2"></a><a name="t2"></a><a id="ES6_75"></a>ES6语法详解</h2>
+<blockquote>
+<p>什么是ES6？</p>
+</blockquote>
+<p>ES6是ECMAScript6的简称，是于2015年6月正式发布的JavaScript语言的标准，正式名为ECMAScript 2015（ES2015）。它的目标是使JavaScript语言可以用来编写复杂的大型应用程序，成为企业级开发语言。<br>
+在IDEA中默认配置ECMAScript5版本，我们如果要编写ES6的语法，需要进行配置。<br>
+<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8xMTQwNTU1OC1hYzkxN2RkZWNmYzM5ZjRjLnBuZw?x-oss-process=image/format,png" alt="IDEA配置支持ES6语法"><br>
+接下来我们通过和ES5语法的对比来学习ES6语法。</p>
+<blockquote>
+<p>let声明变量</p>
+</blockquote>
+<p>ES5使用var声明变量，ES6使用let声明变量。它们的区别请看如下示例代码。</p>
+<pre class="prettyprint"><code class="has-numbering" onclick="mdcp.copyCode(event)" style="position: unset;">
+//var 声明的变量没有作用域
+//let声明的变量有作用域
+// &#123;
+//     var a=1
+//     let b=2
+// &#125;
+// console.log(a)//1
+// console.log(b)//b is not defined
+
+<p>//var可以声明多次<br>//let只能声明一次<br>// var m=1;<br>// var m=2;<br>// let n=3;<br>// let n=4;// Identifier ‘n’ has already been declared<br>// console.log(m)<br>// console.log(n)</p>
+<p>//var会提升变量的作用域<br>//let不会提升变量的作用域<br>console.log(x) //undefined<br>var x=’apple’</p>
+<p>console.log(y) // Cannot access ‘y’ before initialization<br>let y=’orange’</p>
+<div class="hljs-button &#123;2&#125;" data-title="复制"></div></code><ul class="pre-numbering"><li style="color: rgb(153, 153, 153);">1</li><li style="color: rgb(153, 153, 153);">2</li><li style="color: rgb(153, 153, 153);">3</li><li style="color: rgb(153, 153, 153);">4</li><li style="color: rgb(153, 153, 153);">5</li><li style="color: rgb(153, 153, 153);">6</li><li style="color: rgb(153, 153, 153);">7</li><li style="color: rgb(153, 153, 153);">8</li><li style="color: rgb(153, 153, 153);">9</li><li style="color: rgb(153, 153, 153);">10</li><li style="color: rgb(153, 153, 153);">11</li><li style="color: rgb(153, 153, 153);">12</li><li style="color: rgb(153, 153, 153);">13</li><li style="color: rgb(153, 153, 153);">14</li><li style="color: rgb(153, 153, 153);">15</li><li style="color: rgb(153, 153, 153);">16</li><li style="color: rgb(153, 153, 153);">17</li><li style="color: rgb(153, 153, 153);">18</li><li style="color: rgb(153, 153, 153);">19</li><li style="color: rgb(153, 153, 153);">20</li><li style="color: rgb(153, 153, 153);">21</li><li style="color: rgb(153, 153, 153);">22</li><li style="color: rgb(153, 153, 153);">23</li><li style="color: rgb(153, 153, 153);">24</li><li style="color: rgb(153, 153, 153);">25</li><li style="color: rgb(153, 153, 153);">26</li></ul></pre>
+<p>总结：</p>
+<ul>
+<li>var声明的变量没有作用域，let声明的变量有作用域。</li>
+<li>var可以声明多次，let只能声明一次。</li>
+<li>var会提升变量的作用域，let不会提升变量的作用域。</li>
+</ul>
+<blockquote>
+<p>常量</p>
+</blockquote>
+<p>ES5常量并不是真正的常量，只是一种约定，实际上开发人员还是能改变常量的值，ES6常量被声明之后就不允许被改变了，一旦声明就必须初始化，否则会报"Missing initializer in const declaration"错误。示例代码如下：</p>
+<pre class="prettyprint"><code class="has-numbering" onclick="mdcp.copyCode(event)" style="position: unset;">//一旦声明常量就不能被修改
+const PI ='3.1415926'
+PI = 0 //Assignment to constant variable.
+
+<p>//一旦声明就必须初始化，否则就会报错<br>const MY_APP // Missing initializer in const declaration</p>
+<div class="hljs-button &#123;2&#125;" data-title="复制"></div></code><ul class="pre-numbering"><li style="color: rgb(153, 153, 153);">1</li><li style="color: rgb(153, 153, 153);">2</li><li style="color: rgb(153, 153, 153);">3</li><li style="color: rgb(153, 153, 153);">4</li><li style="color: rgb(153, 153, 153);">5</li><li style="color: rgb(153, 153, 153);">6</li></ul></pre>
+<blockquote>
+<p>解构赋值</p>
+</blockquote>
+<p>ES5将一个对象的属性赋值给其他变量必须一个一个取，ES6可以直接取出对象中的所有值赋值给其他变量。示例代码如下：</p>
+<pre class="prettyprint"><code class="has-numbering" onclick="mdcp.copyCode(event)" style="position: unset;">//传统的
+// let a=1,b=2, c=3
+// console.log(a,b,c)
+
+<p>// //es6<br>// let [x,y,z]=[1,2,3]<br>// console.log(x,y,z)</p>
+<p>//对象定义<br>let user=&#123;name:’wunian’,age:10&#125;<br>//传统的<br>let name1=user.name<br>let age1=user.age<br>console.log(name1,age1)<br>//es6 取出对象中所有的值<br>let &#123;name,age&#125;=user //解构的变量名必须和对象属性同名<br>console.log(name,age)</p>
+<div class="hljs-button &#123;2&#125;" data-title="复制"></div></code><ul class="pre-numbering"><li style="color: rgb(153, 153, 153);">1</li><li style="color: rgb(153, 153, 153);">2</li><li style="color: rgb(153, 153, 153);">3</li><li style="color: rgb(153, 153, 153);">4</li><li style="color: rgb(153, 153, 153);">5</li><li style="color: rgb(153, 153, 153);">6</li><li style="color: rgb(153, 153, 153);">7</li><li style="color: rgb(153, 153, 153);">8</li><li style="color: rgb(153, 153, 153);">9</li><li style="color: rgb(153, 153, 153);">10</li><li style="color: rgb(153, 153, 153);">11</li><li style="color: rgb(153, 153, 153);">12</li><li style="color: rgb(153, 153, 153);">13</li><li style="color: rgb(153, 153, 153);">14</li><li style="color: rgb(153, 153, 153);">15</li><li style="color: rgb(153, 153, 153);">16</li><li style="color: rgb(153, 153, 153);">17</li></ul></pre>
+<blockquote>
+<p>模板字符串</p>
+</blockquote>
+<p>ES6支持在字符串中引号需要改为``，可以直接在字符串中使用变量，不需要像ES5那样拼接字符串。示例代码如下：</p>
+<pre class="prettyprint"><code class="has-numbering" onclick="mdcp.copyCode(event)" style="position: unset;">let name='hello'
+let age=3
+//传统的
+let info='name:'+name+" age:"+age//拼接字符串
+
+<p>//字符串引号要改为``<br>let infoes6=<code>name:$&#123;name&#125; age:$&#123;age&#125;</code> //模板字符串，真正的前端开发</p>
+<p>console.log(info)<br>console.log(infoes6)</p>
+<div class="hljs-button {2}" data-title="复制"></div></code><ul class="pre-numbering"><li style="color: rgb(153, 153, 153);">1</li><li style="color: rgb(153, 153, 153);">2</li><li style="color: rgb(153, 153, 153);">3</li><li style="color: rgb(153, 153, 153);">4</li><li style="color: rgb(153, 153, 153);">5</li><li style="color: rgb(153, 153, 153);">6</li><li style="color: rgb(153, 153, 153);">7</li><li style="color: rgb(153, 153, 153);">8</li><li style="color: rgb(153, 153, 153);">9</li><li style="color: rgb(153, 153, 153);">10</li></ul></pre>
+<blockquote>
+<p>对象声明简写</p>
+</blockquote>
+<p>一个对象中的属性如果和值的参数名相同，可以省略属性，直接传入参数名。示例代码如下：</p>
+<pre class="prettyprint"><code class="has-numbering" onclick="mdcp.copyCode(event)" style="position: unset;">const age=3
+const name='wunian'
+
+<p>//传统的<br>const person1=&#123;age:age,name:name&#125;<br>console.log(person1)</p>
+<p>//es6<br>const person2=&#123;name,age&#125;<br>console.log(person2)</p>
+<div class="hljs-button &#123;2&#125;" data-title="复制"></div></code><ul class="pre-numbering"><li style="color: rgb(153, 153, 153);">1</li><li style="color: rgb(153, 153, 153);">2</li><li style="color: rgb(153, 153, 153);">3</li><li style="color: rgb(153, 153, 153);">4</li><li style="color: rgb(153, 153, 153);">5</li><li style="color: rgb(153, 153, 153);">6</li><li style="color: rgb(153, 153, 153);">7</li><li style="color: rgb(153, 153, 153);">8</li><li style="color: rgb(153, 153, 153);">9</li><li style="color: rgb(153, 153, 153);">10</li></ul></pre>
+<blockquote>
+<p>定义方法简写</p>
+</blockquote>
+<p>ES5我们在对象中定义方法的格式为：方法名:function()，ES6可以把function省略。示例代码如下：</p>
+<pre class="prettyprint"><code class="has-numbering" onclick="mdcp.copyCode(event)" style="position: unset;">const p=&#123;
+    //方法
+    sayHi:function()&#123;
+        console.log('hello')
+    &#125;
+&#125;
+p.sayHi();
+
+<p>//es6<br>const p2=&#123;<br>    sayHi()&#123;<br>        console.log(“hello es6”)<br>    &#125;<br>&#125;<br>p2.sayHi()</p>
+<div class="hljs-button &#123;2&#125;" data-title="复制"></div></code><ul class="pre-numbering"><li style="color: rgb(153, 153, 153);">1</li><li style="color: rgb(153, 153, 153);">2</li><li style="color: rgb(153, 153, 153);">3</li><li style="color: rgb(153, 153, 153);">4</li><li style="color: rgb(153, 153, 153);">5</li><li style="color: rgb(153, 153, 153);">6</li><li style="color: rgb(153, 153, 153);">7</li><li style="color: rgb(153, 153, 153);">8</li><li style="color: rgb(153, 153, 153);">9</li><li style="color: rgb(153, 153, 153);">10</li><li style="color: rgb(153, 153, 153);">11</li><li style="color: rgb(153, 153, 153);">12</li><li style="color: rgb(153, 153, 153);">13</li><li style="color: rgb(153, 153, 153);">14</li><li style="color: rgb(153, 153, 153);">15</li></ul></pre>
+<blockquote>
+<p>对象扩展运算符</p>
+</blockquote>
+<p>ES5将一个对象赋值给另一个变量，实际上是引用赋值，引用指向的地址和原对象是相同的，因此现对象的值一旦发生改变，会影响原对象的值，类似于Java中的引用传递。ES6可以实现对象的完全拷贝，一旦拷贝现对象就和原对象没任何关系了，因此它是一种深拷贝。示例代码如下：</p>
+<pre class="prettyprint"><code class="has-numbering" onclick="mdcp.copyCode(event)" style="position: unset;">let person=&#123;name:'wunian',age:20&#125;
+let someoneOld=person //引用赋值
+
+<p>//对象拷贝 … 深度拷贝<br>let someone=&#123;…person&#125;<br>someoneOld.name=’jishiyu’<br>someone.name=’jishiyu neo’</p>
+<p>console.log(person) //jishiyu<br>console.log(someoneOld)//‘jishiyu’<br>console.log(someone) //jishiyu neo</p>
+<div class="hljs-button &#123;2&#125;" data-title="复制"></div></code><ul class="pre-numbering"><li style="color: rgb(153, 153, 153);">1</li><li style="color: rgb(153, 153, 153);">2</li><li style="color: rgb(153, 153, 153);">3</li><li style="color: rgb(153, 153, 153);">4</li><li style="color: rgb(153, 153, 153);">5</li><li style="color: rgb(153, 153, 153);">6</li><li style="color: rgb(153, 153, 153);">7</li><li style="color: rgb(153, 153, 153);">8</li><li style="color: rgb(153, 153, 153);">9</li><li style="color: rgb(153, 153, 153);">10</li><li style="color: rgb(153, 153, 153);">11</li></ul></pre>
+<blockquote>
+<p>函数的默认参数</p>
+</blockquote>
+<p>ES6可以对函数中的形参设置默认值。示例代码如下：</p>
+<pre class="prettyprint"><code class="has-numbering" onclick="mdcp.copyCode(event)" style="position: unset;">function showInfo(name,age=18)&#123;
+    console.log(name+','+age)
+&#125;
+
+<p>showInfo(‘wunian’,20) //wunian,20<br>showInfo(‘wunian’) //wunian,18<br>showInfo(‘wunian’,undefined) //wunian,18<br>showInfo(‘wunian’,null)  //wunian,null</p>
+<div class="hljs-button &#123;2&#125;" data-title="复制"></div></code><ul class="pre-numbering"><li style="color: rgb(153, 153, 153);">1</li><li style="color: rgb(153, 153, 153);">2</li><li style="color: rgb(153, 153, 153);">3</li><li style="color: rgb(153, 153, 153);">4</li><li style="color: rgb(153, 153, 153);">5</li><li style="color: rgb(153, 153, 153);">6</li><li style="color: rgb(153, 153, 153);">7</li><li style="color: rgb(153, 153, 153);">8</li></ul></pre>
+<blockquote>
+<p>箭头函数</p>
+</blockquote>
+<p>ES6箭头函数类似于Java中的lambda表达式，是函数的一种简化形式，一般格式为：<code>参数=&gt;函数体</code>。示例代码如下：</p>
+<pre class="prettyprint"><code class="has-numbering" onclick="mdcp.copyCode(event)" style="position: unset;">let arr=['100','534','37','412','3000']
+let arr1=arr.sort();
+console.log(arr1)
+//需要使用排序的函数
+let arr2=arr.sort((a,b) =&gt; a-b)
+console.log(arr2)
+// let arr2=arr.sort(function(a,b)&#123;
+//     return a-b
+// &#125;)
+
+<p>//()=&gt;&#123;&#125;<br>var f1=function (a,b)&#123;<br>    let result =a+b<br>    return result<br>&#125;</p>
+<p>var f2= (a,b) =&gt;&#123;<br>    let result =a+b<br>    return result<br>&#125;<br>//最终简化版本<br>var f3= (a,b) =&gt; a+b</p>
+<p>console.log(f1(2,3))<br>console.log(f2(2,3))<br>console.log(f3(2,3))</p>
+<div class="hljs-button &#123;2&#125;" data-title="复制"></div></code><ul class="pre-numbering"><li style="color: rgb(153, 153, 153);">1</li><li style="color: rgb(153, 153, 153);">2</li><li style="color: rgb(153, 153, 153);">3</li><li style="color: rgb(153, 153, 153);">4</li><li style="color: rgb(153, 153, 153);">5</li><li style="color: rgb(153, 153, 153);">6</li><li style="color: rgb(153, 153, 153);">7</li><li style="color: rgb(153, 153, 153);">8</li><li style="color: rgb(153, 153, 153);">9</li><li style="color: rgb(153, 153, 153);">10</li><li style="color: rgb(153, 153, 153);">11</li><li style="color: rgb(153, 153, 153);">12</li><li style="color: rgb(153, 153, 153);">13</li><li style="color: rgb(153, 153, 153);">14</li><li style="color: rgb(153, 153, 153);">15</li><li style="color: rgb(153, 153, 153);">16</li><li style="color: rgb(153, 153, 153);">17</li><li style="color: rgb(153, 153, 153);">18</li><li style="color: rgb(153, 153, 153);">19</li><li style="color: rgb(153, 153, 153);">20</li><li style="color: rgb(153, 153, 153);">21</li><li style="color: rgb(153, 153, 153);">22</li><li style="color: rgb(153, 153, 153);">23</li><li style="color: rgb(153, 153, 153);">24</li><li style="color: rgb(153, 153, 153);">25</li><li style="color: rgb(153, 153, 153);">26</li></ul></pre>
+<p>在许多前端框架的底层代码中，可以看到大量这种ES6语法的代码，尤其是对接后端接口的API。</p>
+<h2><a name="t3"></a><a name="t3"></a><a id="NPM_264"></a>NPM包管理</h2>
+<p>只要安装了Node.js，系统就会自动安装npm环境。</p>
+<pre class="prettyprint"><code class="has-numbering" onclick="mdcp.copyCode(event)" style="position: unset;">C:\Users\Administrator&gt;npm -v 
+6.13.4
+<div class="hljs-button &#123;2&#125;" data-title="复制"></div></code><ul class="pre-numbering"><li style="color: rgb(153, 153, 153);">1</li><li style="color: rgb(153, 153, 153);">2</li></ul></pre>
+<blockquote>
+<p>什么是npm？</p>
+</blockquote>
+<p>npm的全称是Node Package Manager，是一个NodeJS包管理和分发工具，已经成为了非官方的发布Node模块（包）的标准。好比Java中的maven，所有东西只要导入依赖即可，npm也是如此，<code>npm install</code>命令类似于Linux的yum安装。</p>
+<blockquote>
+<p>测试使用</p>
+</blockquote>
+<p>1、创建一个npm目录。<br>
+2、测试初始化项目，理解npm是如何管理前端依赖的。package.json文件和pom文件一样，用来管理我们的项目版本依赖。<br>
+项目初始化：</p>
+<pre class="prettyprint"><code class="has-numbering" onclick="mdcp.copyCode(event)" style="position: unset;">npm init  #初始化，需要设置一些参数
+npm init -y # 快速初始化，自动设置默认参数，
+<div class="hljs-button &#123;2&#125;" data-title="复制"></div></code><ul class="pre-numbering"><li style="color: rgb(153, 153, 153);">1</li><li style="color: rgb(153, 153, 153);">2</li></ul></pre>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8xMTQwNTU1OC1iNWM2NjcyYTlhMmJlN2I4LnBuZw?x-oss-process=image/format,png" alt="package.json"></p>
+<blockquote>
+<p>修改npm镜像</p>
+</blockquote>
+<p>npm默认镜像地址在国外，下载缓慢，我们可以把它修改成淘宝的镜像，那样下载速度会比较快。</p>
+<pre class="prettyprint"><code class="has-numbering" onclick="mdcp.copyCode(event)" style="position: unset;"> #查看npm的配置信息
+npm config list
+#配置所有依赖通过淘宝镜像下载，速度较快
+npm config set registry https://registry.npm.taobao.org/
+<div class="hljs-button &#123;2&#125;" data-title="复制"></div></code><ul class="pre-numbering"><li style="color: rgb(153, 153, 153);">1</li><li style="color: rgb(153, 153, 153);">2</li><li style="color: rgb(153, 153, 153);">3</li><li style="color: rgb(153, 153, 153);">4</li></ul></pre>
+<blockquote>
+<p>下载依赖包</p>
+</blockquote>
+<p>1、<code>npm install xxx</code> 安装指定依赖，默认安装最新版本。<br>
+2、<code>npm install xxx@x.x.x</code> 安装指定依赖并指定版本。<br>
+3、package.json管理了所有的依赖版本控制。<br>
+4、<code>npm install --save-dev(或者 -D) xxx</code> 安装指定依赖并且只在开发的时候使用。<br>
+<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8xMTQwNTU1OC0zNGQ4NjdjMjRiMDAwZTNjLnBuZw?x-oss-process=image/format,png" alt="devDependencies"></p>
+<p>5、<code>npm install -g xxx</code> 全局环境下安装指定依赖，依赖安装位置一般在<code>C:\User\Administrator\AppData\Roaming\npm\node_modules</code>目录下，在VSCode终端中可能会因为权限问题安装失败，可以去DOS窗口下运行该命令进行安装。<br>
+<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8xMTQwNTU1OC02ZTY0ZjYwYjVjODNkZmFiLnBuZw?x-oss-process=image/format,png" alt="全局安装"><br>
+<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8xMTQwNTU1OC0xZWFhY2Y4OWE3YTc1MzU1LnBuZw?x-oss-process=image/format,png" alt="全局安装路径"><br>
+6、更新和卸载指定依赖包：</p>
+<pre class="prettyprint"><code class="has-numbering" onclick="mdcp.copyCode(event)" style="position: unset;">npm update xxx# 更新包
+npm uninstall xxx# 卸载包
+<div class="hljs-button &#123;2&#125;" data-title="复制"></div></code><ul class="pre-numbering"><li style="color: rgb(153, 153, 153);">1</li><li style="color: rgb(153, 153, 153);">2</li></ul></pre>
+<h2><a name="t4"></a><a name="t4"></a><a id="Babel_310"></a>Babel</h2>
+<blockquote>
+<p>什么是Babel？</p>
+</blockquote>
+<p>很多ES6高级语法浏览器是不支持的，Node.js也不一定能够运行，这时就需要使用转码器了。Babel是一个使用非常广泛的转码器，它可以将ES6语法代码转换为ES5语法代码，实现了语法的自动转换。</p>
+<blockquote>
+<p>安装Babel</p>
+</blockquote>
+<p>1、使用npm安装babel-cli工具。</p>
+<pre class="prettyprint"><code class="has-numbering" onclick="mdcp.copyCode(event)" style="position: unset;">npm install -g babel-cli #安装babel-cli
+<div class="hljs-button &#123;2&#125;" data-title="复制"></div></code><ul class="pre-numbering"><li style="color: rgb(153, 153, 153);">1</li></ul></pre>
+<p>2、安装完毕后查看babel版本进行测试。</p>
+<pre class="prettyprint"><code class="has-numbering" onclick="mdcp.copyCode(event)" style="position: unset;">babel --version # 查看babel版本
+6.26.0 (babel-core 6.26.3)
+<div class="hljs-button &#123;2&#125;" data-title="复制"></div></code><ul class="pre-numbering"><li style="color: rgb(153, 153, 153);">1</li><li style="color: rgb(153, 153, 153);">2</li></ul></pre>
+<blockquote>
+<p>测试使用</p>
+</blockquote>
+<p>1、创建babel目录，再在该目录下创建src目录（以后我们的js代码都应该放在src目录下），在src目录下编写js源代码。<br>
+2、编写.babelrc配置文件，注意这里的"es2015"指的就是ES6语法。</p>
+<pre class="prettyprint"><code class="has-numbering" onclick="mdcp.copyCode(event)" style="position: unset;">&#123;
+    "presets":[
+        "es2015"    
+    ],
+    "plugins":[]
+&#125;
+<div class="hljs-button &#123;2&#125;" data-title="复制"></div></code><ul class="pre-numbering"><li style="color: rgb(153, 153, 153);">1</li><li style="color: rgb(153, 153, 153);">2</li><li style="color: rgb(153, 153, 153);">3</li><li style="color: rgb(153, 153, 153);">4</li><li style="color: rgb(153, 153, 153);">5</li><li style="color: rgb(153, 153, 153);">6</li></ul></pre>
+<p>3、安装babel依赖。</p>
+<pre class="prettyprint"><code class="has-numbering" onclick="mdcp.copyCode(event)" style="position: unset;">npm install -D babel-preset-es2015
+<div class="hljs-button &#123;2&#125;" data-title="复制"></div></code><ul class="pre-numbering"><li style="color: rgb(153, 153, 153);">1</li></ul></pre>
+<p>4、转码输出测试。将src目录下的example.js转码输出到dist1目录下的dist.js中。</p>
+<pre class="prettyprint"><code class="has-numbering" onclick="mdcp.copyCode(event)" style="position: unset;">babel .\src\example.js --out-file .\dist1\dist.js
+<div class="hljs-button &#123;2&#125;" data-title="复制"></div></code><ul class="pre-numbering"><li style="color: rgb(153, 153, 153);">1</li></ul></pre>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8xMTQwNTU1OC00NzZmMDk2MmQ4ZWQzZDA2LnBuZw?x-oss-process=image/format,png" alt="babel转码前后代码对比"></p>
+<blockquote>
+<p>自定义脚本</p>
+</blockquote>
+<p>我们可以在package.json文件中配置一些自定义脚本，以后只需要在终端中执行<code>npm run xxx</code>命令即可执行指定的脚本。例如将我们的babel转码命令配置成自定义脚本，配置代码如下：</p>
+<pre class="prettyprint"><code class="has-numbering" onclick="mdcp.copyCode(event)" style="position: unset;">"scripts": &#123;
+   "build": "babel .\\src\\example.js --out-file .\\dist\\dist.js"
+ &#125;
+<div class="hljs-button &#123;2&#125;" data-title="复制"></div></code><ul class="pre-numbering"><li style="color: rgb(153, 153, 153);">1</li><li style="color: rgb(153, 153, 153);">2</li><li style="color: rgb(153, 153, 153);">3</li></ul></pre>
+<p>使用<code>npm run build</code>可以执行该脚本。<br>
+这里可以编写多个脚本，这样以后执行一些操作就不需要每次都输入那么长的命令了。<br>
+诸如<code>npm run test</code>、<code>npm run start</code>这种命令本质上就是一段自定义脚本，以后看到类似的启动方式，只要去找它的scripts脚本就好了。</p>
+<h2><a name="t5"></a><a name="t5"></a><a id="_359"></a>模块化</h2>
+<p>随着互联网的发展，许多网站也一步步的互联网化了，这使得项目中的js代码也越来越多了，变得十分复杂。<br>
+我们都知道Java中可以在一个类中使用import关键字导入其他类进行调用，这样很好的实现了模块化开发。那么js是否也可以进行模块化开发呢？于是js也开始慢慢向模块化开发方向发展，后来产生了两种模块化规范：<strong>CommonJS规范</strong>和<strong>ES6模块化规范</strong></p>
+<blockquote>
+<p>CommonJS规范</p>
+</blockquote>
+<p>CommonJS模块的特点如下：</p>
+<ul>
+<li>所有代码都运行在模块作用域，不会污染全局作用域。</li>
+<li>模块可以多次加载，但是只会在第一次加载时运行一次，然后运行结果就被缓存了，以后再加载，就直接读取缓存结果。要想让模块再次运行，必须清除缓存。</li>
+<li>模块加载的顺序和其在代码中出现的顺序一致。</li>
+</ul>
+<p>如下代码,在<code>导出四则运算.js</code>文件中定义了一些四则运算的函数，我们使用CommonJS规范来将其导出。</p>
+<pre class="prettyprint"><code class="has-numbering" onclick="mdcp.copyCode(event)" style="position: unset;">const sum=function (a,b)&#123;
+    return a+b
+&#125;
+
+<p>const sub=function (a,b)&#123;<br>    return a-b<br>&#125;</p>
+<p>const mul=function (a,b)&#123;<br>    return a*b<br>&#125;</p>
+<p>const div=function (a,b)&#123;<br>    return a/b<br>&#125;</p>
+<p>//导出这些方法供他人使用<br>// module.exports=&#123;<br>//     sum:sum,<br>//     sub:sub,<br>//     mul:mul,<br>//     div:div<br>// &#125;</p>
+<p>//如果导出名称和方法名相同，可以简写<br>module.exports=&#123;<br>    sum,<br>    sub,<br>    mul,<br>    div<br>&#125;</p>
+<div class="hljs-button &#123;2&#125;" data-title="复制"></div></code><ul class="pre-numbering"><li style="color: rgb(153, 153, 153);">1</li><li style="color: rgb(153, 153, 153);">2</li><li style="color: rgb(153, 153, 153);">3</li><li style="color: rgb(153, 153, 153);">4</li><li style="color: rgb(153, 153, 153);">5</li><li style="color: rgb(153, 153, 153);">6</li><li style="color: rgb(153, 153, 153);">7</li><li style="color: rgb(153, 153, 153);">8</li><li style="color: rgb(153, 153, 153);">9</li><li style="color: rgb(153, 153, 153);">10</li><li style="color: rgb(153, 153, 153);">11</li><li style="color: rgb(153, 153, 153);">12</li><li style="color: rgb(153, 153, 153);">13</li><li style="color: rgb(153, 153, 153);">14</li><li style="color: rgb(153, 153, 153);">15</li><li style="color: rgb(153, 153, 153);">16</li><li style="color: rgb(153, 153, 153);">17</li><li style="color: rgb(153, 153, 153);">18</li><li style="color: rgb(153, 153, 153);">19</li><li style="color: rgb(153, 153, 153);">20</li><li style="color: rgb(153, 153, 153);">21</li><li style="color: rgb(153, 153, 153);">22</li><li style="color: rgb(153, 153, 153);">23</li><li style="color: rgb(153, 153, 153);">24</li><li style="color: rgb(153, 153, 153);">25</li><li style="color: rgb(153, 153, 153);">26</li><li style="color: rgb(153, 153, 153);">27</li><li style="color: rgb(153, 153, 153);">28</li><li style="color: rgb(153, 153, 153);">29</li><li style="color: rgb(153, 153, 153);">30</li><li style="color: rgb(153, 153, 153);">31</li></ul></pre>
+<p>在同一目录下创建<code>引入测试.js</code>文件，编写导入测试代码如下：</p>
+<pre class="prettyprint"><code class="has-numbering" onclick="mdcp.copyCode(event)" style="position: unset;">const m=require('./导出四则运算')
+console.log(m)
+//测试方法，正常输出
+const r1=m.sum(1,1)
+const r2=m.sub(1,2)
+
+<p>console.log(r1)<br>console.log(r2)</p>
+<div class="hljs-button &#123;2&#125;" data-title="复制"></div></code><ul class="pre-numbering"><li style="color: rgb(153, 153, 153);">1</li><li style="color: rgb(153, 153, 153);">2</li><li style="color: rgb(153, 153, 153);">3</li><li style="color: rgb(153, 153, 153);">4</li><li style="color: rgb(153, 153, 153);">5</li><li style="color: rgb(153, 153, 153);">6</li><li style="color: rgb(153, 153, 153);">7</li><li style="color: rgb(153, 153, 153);">8</li></ul></pre>
+<blockquote>
+<p>ES6模块化规范</p>
+</blockquote>
+<p>ES6在语言标准上实现了模块功能，设计思想是尽量的静态化，使得编译时就能确定模块的依赖关系（CommonJS只能在运行时确定），以及输入输出变量。ES6的模块并不是对象，而是通过export显示指定输出的代码，再通过import命令导入。<br>
+<strong>第一种写法</strong><br>
+如下代码，在<code>userApi.js</code>文件中使用ES6模块化规范导出两个方法。</p>
+<pre class="prettyprint"><code class="has-numbering" onclick="mdcp.copyCode(event)" style="position: unset;">export function getList()&#123;
+    console.log('获取用户列表')
+&#125;
+
+<p>export function save()&#123;<br>    console.log(‘保存用户信息’)<br>&#125;</p>
+<div class="hljs-button &#123;2&#125;" data-title="复制"></div></code><ul class="pre-numbering"><li style="color: rgb(153, 153, 153);">1</li><li style="color: rgb(153, 153, 153);">2</li><li style="color: rgb(153, 153, 153);">3</li><li style="color: rgb(153, 153, 153);">4</li><li style="color: rgb(153, 153, 153);">5</li><li style="color: rgb(153, 153, 153);">6</li><li style="color: rgb(153, 153, 153);">7</li></ul></pre>
+<p>在<code>userComponent.js</code>文件中编写导入测试代码如下：</p>
+<pre class="prettyprint"><code class="has-numbering" onclick="mdcp.copyCode(event)" style="position: unset;">//import node不支持，需要使用babel进行转码后运行
+import &#123;getList,save&#125; from './userApi'
+
+<p>getList();<br>save();</p>
+<div class="hljs-button &#123;2&#125;" data-title="复制"></div></code><ul class="pre-numbering"><li style="color: rgb(153, 153, 153);">1</li><li style="color: rgb(153, 153, 153);">2</li><li style="color: rgb(153, 153, 153);">3</li><li style="color: rgb(153, 153, 153);">4</li><li style="color: rgb(153, 153, 153);">5</li></ul></pre>
+<p><strong>第二种写法</strong><br>
+如下代码，在<code>userApi2.js</code>文件中使用ES6模块化规范导出两个方法。</p>
+<pre class="prettyprint"><code class="has-numbering" onclick="mdcp.copyCode(event)" style="position: unset;">export default&#123;
+    getList()&#123;
+        console.log("获取数据列表")
+    &#125;,
+    save()&#123;
+        console.log("保存数据列表")
+    &#125;
+&#125;
+<div class="hljs-button &#123;2&#125;" data-title="复制"></div></code><ul class="pre-numbering"><li style="color: rgb(153, 153, 153);">1</li><li style="color: rgb(153, 153, 153);">2</li><li style="color: rgb(153, 153, 153);">3</li><li style="color: rgb(153, 153, 153);">4</li><li style="color: rgb(153, 153, 153);">5</li><li style="color: rgb(153, 153, 153);">6</li><li style="color: rgb(153, 153, 153);">7</li><li style="color: rgb(153, 153, 153);">8</li></ul></pre>
+<p>在<code>userComponent2.js</code>文件中编写导入测试代码如下：</p>
+<pre class="prettyprint"><code class="has-numbering" onclick="mdcp.copyCode(event)" style="position: unset;">import user from './userApi2'
+
+<p>user.getList()<br>user.save()</p>
+<div class="hljs-button &#123;2&#125;" data-title="复制"></div></code><ul class="pre-numbering"><li style="color: rgb(153, 153, 153);">1</li><li style="color: rgb(153, 153, 153);">2</li><li style="color: rgb(153, 153, 153);">3</li><li style="color: rgb(153, 153, 153);">4</li></ul></pre>
+<p>注意：Node.js不支持ES6模块化语法，因此需要使用babel进行转码再运行，上述两种写法都是如此。</p>
+<h2><a name="t6"></a><a name="t6"></a><a id="webpack_458"></a>webpack</h2>
+<blockquote>
+<p>什么是webpack？</p>
+</blockquote>
+<p>webpack是一个现代JavaScript应用程序的静态模块打包器(module bundler)。当webpack处理应用程序时，它会递归地构建一个依赖关系图(dependency graph)，其中包含应用程序需要的每个模块，然后将所有这些模块打包成一个或多个bundle。<br>
+简单来说就是一个前端资源打包工具，它可以把js、less、css、png等文件通通打成一个或多个js文件。这样做的好处是可以让我们的代码不那么繁琐，实现代码的复用。</p>
+<blockquote>
+<p>webpack安装</p>
+</blockquote>
+<p>1、使用npm安装webpack-cli工具。</p>
+<pre class="prettyprint"><code class="has-numbering" onclick="mdcp.copyCode(event)" style="position: unset;">npm install -g webpack webpack-cli
+<div class="hljs-button &#123;2&#125;" data-title="复制"></div></code><ul class="pre-numbering"><li style="color: rgb(153, 153, 153);">1</li></ul></pre>
+<p>2、安装完毕后查看webpack版本进行测试。</p>
+<pre class="prettyprint"><code class="has-numbering" onclick="mdcp.copyCode(event)" style="position: unset;">webpack -v
+<div class="hljs-button &#123;2&#125;" data-title="复制"></div></code><ul class="pre-numbering"><li style="color: rgb(153, 153, 153);">1</li></ul></pre>
+<blockquote>
+<p>测试使用</p>
+</blockquote>
+<p>1、创建webpack目录并初始化项目<code>npm init</code><br>
+2、在webpack目录下创建src目录，编写js代码。<br>
+3、webpack打包。</p>
+<pre class="prettyprint"><code class="has-numbering" onclick="mdcp.copyCode(event)" style="position: unset;">webpack --mode=development
+<div class="hljs-button &#123;2&#125;" data-title="复制"></div></code><ul class="pre-numbering"><li style="color: rgb(153, 153, 153);">1</li></ul></pre>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8xMTQwNTU1OC0zZmU0OTc0NjA3Y2UzZDlhLnBuZw?x-oss-process=image/format,png" alt="webpack打包"><br>
+4、如果要打包css文件，需要先安装css-loader。除js以外的其他类型文件都需要安装相应的loader，并且需要配置对应的打包规则，详细配置规则可以查阅官网。</p>
+<pre class="prettyprint"><code class="has-numbering" onclick="mdcp.copyCode(event)" style="position: unset;">npm install --save-dev style-loader css-loader
+<div class="hljs-button &#123;2&#125;" data-title="复制"></div></code><ul class="pre-numbering"><li style="color: rgb(153, 153, 153);">1</li></ul></pre>
+<p>然后在webpack.config.js文件中配置css打包映射规则。</p>
+<pre class="prettyprint"><code class="has-numbering" onclick="mdcp.copyCode(event)" style="position: unset;">const path=require('path')  //Node.js的内置模块
+
+<p>module.exports=&#123;<br>    entry:’./src/main.js’,<br>    output:&#123;<br>        path:path.resolve(__dirname,’./dist’), //输出路径<br>        filename:’bundle.js’<br>    &#125;,<br>    module:&#123;<br>        rules:[<br>            &#123;<br>                test:/.css$/, //打包规则映射到css结尾的文件上<br>                use:[‘style-loader’,’css-loader’]<br>            &#125;<br>        ]<br>    &#125;<br>&#125;</p>
+<div class="hljs-button &#123;2&#125;" data-title="复制"></div></code><ul class="pre-numbering"><li style="color: rgb(153, 153, 153);">1</li><li style="color: rgb(153, 153, 153);">2</li><li style="color: rgb(153, 153, 153);">3</li><li style="color: rgb(153, 153, 153);">4</li><li style="color: rgb(153, 153, 153);">5</li><li style="color: rgb(153, 153, 153);">6</li><li style="color: rgb(153, 153, 153);">7</li><li style="color: rgb(153, 153, 153);">8</li><li style="color: rgb(153, 153, 153);">9</li><li style="color: rgb(153, 153, 153);">10</li><li style="color: rgb(153, 153, 153);">11</li><li style="color: rgb(153, 153, 153);">12</li><li style="color: rgb(153, 153, 153);">13</li><li style="color: rgb(153, 153, 153);">14</li><li style="color: rgb(153, 153, 153);">15</li><li style="color: rgb(153, 153, 153);">16</li><li style="color: rgb(153, 153, 153);">17</li></ul></pre>
+<blockquote>
+<p>什么是loader？</p>
+</blockquote>
+<p>loader用于对模块的源代码进行转换。loader可以使你在import或"加载"模块时预处理文件。loader可以将文件从不同的语言（如TypeScript）转换为JavaScript，或将内联图像转换为data URL。loader甚至允许你直接在JavaScript模块中import CSS文件。</p>
+
+<pre><code>                                &lt;/div&gt;&lt;div&gt;&lt;div&gt;&lt;/div&gt;&lt;/div&gt;
+            &lt;link href=&quot;https://csdnimg.cn/release/phoenix/mdeditor/markdown_views-ff98e99283.css&quot; rel=&quot;stylesheet&quot;&gt;
+                            &lt;/div&gt;</code></pre>
+
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2020/08/25/hello-world/" data-toggle="tooltip" data-placement="top"
+                           title="Hello World">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                </ul>
+
+                
+
+                
+
+
+                <!--加入新的评论系统-->
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#content_views"><span class="toc-text">VSCode的使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#content_views"><span class="toc-text">Node.js</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#content_views"><span class="toc-text">ES6语法详解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#content_views"><span class="toc-text">NPM包管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#content_views"><span class="toc-text">Babel</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#content_views"><span class="toc-text">模块化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#content_views"><span class="toc-text">webpack</span></a></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Hexo 2020
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Theme by <a target="_blank" rel="noopener" href="https://haojen.github.io/">Haojen Ma</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/blog.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://shouzhiyo.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','','2.0.0');
+</script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="">
+</body>
+
+</html>
