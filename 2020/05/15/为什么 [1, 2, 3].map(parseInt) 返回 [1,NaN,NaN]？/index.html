@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword" content="">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-person-128.png">
+    <link rel="alternate" type="application/atom+xml" title="TYN" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        前端进阶｜undefined
+        
+    </title>
+
+    <link rel="canonical" href="http://shouzhiyo.github.io/2020/05/15/为什么 [1, 2, 3].map(parseInt) 返回 [1,NaN,NaN]？/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/blog-style.css">
+
+
+    <!-- Pygments Github CSS -->
+    
+<link rel="stylesheet" href="/css/syntax.css">
+
+<meta name="generator" content="Hexo 5.1.1"></head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    TYN
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>前端进阶</h1>
+                    
+                    <span class="meta">
+                         作者 TYNpapa
+                        <span>
+                          日期 2020-05-15
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            前端进阶
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <article class="baidu_pl">
+                 <div id="article_content" class="article_content clearfix">
+            <link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/template/css/ck_htmledit_views-3d4dc5c1de.css">
+                            <div class="htmledit_views" id="content_views">
+                                            <div id="cnblogs_post_body" class="blogpost-body">
+
+<p><span style="font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;color:#555555;"><span style="font-size:14px;line-height:25px;">在 javascript 中&nbsp;</span></span><span class="token punctuation" style="border:1px solid rgb(225,225,232);">[</span><span class="token string" style="border:1px solid rgb(225,225,232);">"1"</span><span class="token punctuation" style="border:1px solid rgb(225,225,232);">,</span><span class="token string" style="border:1px solid rgb(225,225,232);">"2"</span><span class="token punctuation" style="border:1px solid rgb(225,225,232);">,</span><span class="token string" style="border:1px solid rgb(225,225,232);">"3"</span><span class="token punctuation" style="border:1px solid rgb(225,225,232);">]</span><span class="token punctuation" style="border:1px solid rgb(225,225,232);">.</span><span class="token function" style="border:1px solid rgb(225,225,232);">map<span class="token punctuation">(</span></span><span style="border:1px solid rgb(225,225,232);">parseInt</span><span class="token punctuation" style="border:1px solid rgb(225,225,232);">)</span>&nbsp;<span style="color:rgb(85,85,85);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:14px;line-height:25px;">为何<img src="http://justjavac.iteye.com/blog/2019153" width="1" height="1" alt="">返回不是&nbsp;<code class="language-javascript" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;color:rgb(221,17,68);border:1px solid rgb(225,225,232);word-spacing:normal;"><span class="token punctuation" style="color:rgb(153,153,153);">[</span><span class="token number" style="color:rgb(153,0,85);">1</span><span class="token punctuation" style="color:rgb(153,153,153);">,</span><span class="token number" style="color:rgb(153,0,85);">2</span><span class="token punctuation" style="color:rgb(153,153,153);">,</span><span class="token number" style="color:rgb(153,0,85);">3</span><span class="token punctuation" style="color:rgb(153,153,153);">]</span></code>&nbsp;却是&nbsp;<code class="language-javascript" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;color:rgb(221,17,68);border:1px solid rgb(225,225,232);word-spacing:normal;"><span class="token punctuation" style="color:rgb(153,153,153);">[</span><span class="token number" style="color:rgb(153,0,85);">1</span><span class="token punctuation" style="color:rgb(153,153,153);">,</span><span class="token number" style="color:rgb(153,0,85);">NaN</span><span class="token punctuation" style="color:rgb(153,153,153);">,</span><span class="token number" style="color:rgb(153,0,85);">NaN</span><span class="token punctuation" style="color:rgb(153,153,153);">]</span></code>？</span></p>
+<p style="line-height:25px;color:rgb(85,85,85);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:14px;">
+我们首先回顾一下&nbsp;<code class="language-javascript" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;color:rgb(221,17,68);border:1px solid rgb(225,225,232);word-spacing:normal;"><span class="token function">parseInt<span class="token punctuation" style="color:rgb(153,153,153);">(</span></span><span class="token punctuation" style="color:rgb(153,153,153);">)</span></code>&nbsp;个&nbsp;<code class="language-javascript" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;color:rgb(221,17,68);border:1px solid rgb(225,225,232);word-spacing:normal;"><span class="token function">map<span class="token punctuation" style="color:rgb(153,153,153);">(</span></span><span class="token punctuation" style="color:rgb(153,153,153);">)</span></code>&nbsp;两个函数的用法：</p>
+<h2 style="font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;line-height:40px;color:rgb(85,85,85);font-size:16px;"><a name="t0"></a><a name="t0"></a>
+parseInt() 函数</h2>
+<h3 style="font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;line-height:40px;color:rgb(85,85,85);font-size:14px;"><a name="t1"></a><a name="t1"></a>
+定义和用法</h3>
+<p style="line-height:25px;color:rgb(85,85,85);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:14px;">
+<code class="language-javascript" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;color:rgb(221,17,68);border:1px solid rgb(225,225,232);word-spacing:normal;"><span class="token function">parseInt<span class="token punctuation" style="color:rgb(153,153,153);">(</span></span><span class="token punctuation" style="color:rgb(153,153,153);">)</span></code>&nbsp;函数可解析一个字符串，并返回一个整数。</p>
+<h2 style="font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;line-height:40px;color:rgb(85,85,85);font-size:16px;"><a name="t2"></a><a name="t2"></a>
+语法</h2>
+<pre><code class="language-javascript hljs"><ol class="hljs-ln" style="width:1946px"><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="1"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><code class="language-javascript hljs" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;border:0px;word-spacing:normal;"><span class="token function"><span class="hljs-built_in">parseInt</span><span class="token punctuation" style="color:rgb(153,153,153);">(</span></span>string<span class="token punctuation" style="color:rgb(153,153,153);">,</span> radix<span class="token punctuation" style="color:rgb(153,153,153);">)</span></code></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="2"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"></div></div></li></ol></code><div class="hljs-button signin" data-title="登录后复制" onclick="hljs.signin(event)"></div></pre>
+<div class="table-box"><table style="border-collapse:collapse;border-spacing:0px;width:700px;color:rgb(85,85,85);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:14px;line-height:25px;"><tbody><tr style="border-top-width:1px;border-top-style:solid;border-top-color:rgb(204,204,204);"><th style="border:1px solid rgb(221,221,221);">参数</th>
+<th style="border:1px solid rgb(221,221,221);">描述</th>
+</tr><tr style="border-top-width:1px;border-top-style:solid;border-top-color:rgb(204,204,204);"><td style="border:1px solid rgb(221,221,221);">string</td>
+<td style="border:1px solid rgb(221,221,221);">必需。要被解析的字符串。</td>
+</tr><tr style="border-top-width:1px;border-top-style:solid;border-top-color:rgb(204,204,204);"><td style="border:1px solid rgb(221,221,221);">radix</td>
+<td style="border:1px solid rgb(221,221,221);">
+<p>可选。表示要解析的数字的基数。该值介于 2 ~ 36 之间。</p>
+<p>如果省略该参数或其值为 ‘0‘，则数字将以 10 为基础来解析。如果它以 ‘”0x”‘ 或 ‘”0X”‘ 开头，将以 16 为基数。</p>
+<p>如果该参数小于 2 或者大于 36，则 ‘parseInt()‘ 将返回 ‘NaN‘。</p>
+</td>
+</tr></tbody></table></div><h3 style="font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;line-height:40px;color:rgb(85,85,85);font-size:14px;"><a name="t3"></a><a name="t3"></a>
+返回值</h3>
+<p style="line-height:25px;color:rgb(85,85,85);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:14px;">
+返回解析后的数字。</p>
+<h3 style="font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;line-height:40px;color:rgb(85,85,85);font-size:14px;"><a name="t4"></a><a name="t4"></a>
+说明</h3>
+<p style="line-height:25px;color:rgb(85,85,85);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:14px;">
+当参数&nbsp;<code class="language-javascript" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;color:rgb(221,17,68);border:1px solid rgb(225,225,232);word-spacing:normal;">radix</code>&nbsp;的值为&nbsp;<code class="language-javascript" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;color:rgb(221,17,68);border:1px solid rgb(225,225,232);word-spacing:normal;"><span class="token number" style="color:rgb(153,0,85);">0</span></code>，或没有设置该参数时，<code class="language-javascript" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;color:rgb(221,17,68);border:1px solid rgb(225,225,232);word-spacing:normal;"><span class="token function">parseInt<span class="token punctuation" style="color:rgb(153,153,153);">(</span></span><span class="token punctuation" style="color:rgb(153,153,153);">)</span></code>&nbsp;会根据&nbsp;<code class="language-javascript" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;color:rgb(221,17,68);border:1px solid rgb(225,225,232);word-spacing:normal;">string</code>&nbsp;来判断数字的基数。</p>
+<p style="line-height:25px;color:rgb(85,85,85);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:14px;">
+举例：</p>
+<ol style="color:rgb(85,85,85);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:14px;line-height:25px;"><li style="line-height:20px;">
+<p style="line-height:25px;">如果&nbsp;<code class="language-javascript" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;color:rgb(221,17,68);border:1px solid rgb(225,225,232);word-spacing:normal;">string</code>&nbsp;以&nbsp;<code class="language-javascript" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;color:rgb(221,17,68);border:1px solid rgb(225,225,232);word-spacing:normal;"><span class="token string" style="color:rgb(102,153,0);">"0x"</span></code>&nbsp;开头，<code class="language-javascript" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;color:rgb(221,17,68);border:1px solid rgb(225,225,232);word-spacing:normal;"><span class="token function">parseInt<span class="token punctuation" style="color:rgb(153,153,153);">(</span></span><span class="token punctuation" style="color:rgb(153,153,153);">)</span></code>&nbsp;会把&nbsp;<code class="language-javascript" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;color:rgb(221,17,68);border:1px solid rgb(225,225,232);word-spacing:normal;">string</code>&nbsp;的其余部分解析为十六进制的整数。</p>
+</li><li style="line-height:20px;">
+<p style="line-height:25px;">如果&nbsp;<code class="language-javascript" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;color:rgb(221,17,68);border:1px solid rgb(225,225,232);word-spacing:normal;">string</code>&nbsp;以&nbsp;<code class="language-javascript" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;color:rgb(221,17,68);border:1px solid rgb(225,225,232);word-spacing:normal;"><span class="token number" style="color:rgb(153,0,85);">0</span></code>&nbsp;开头，那么
+ ECMAScript v3 允许&nbsp;<code class="language-javascript" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;color:rgb(221,17,68);border:1px solid rgb(225,225,232);word-spacing:normal;"><span class="token function">parseInt<span class="token punctuation" style="color:rgb(153,153,153);">(</span></span><span class="token punctuation" style="color:rgb(153,153,153);">)</span></code>&nbsp;的一个实现把其后的字符解析为八进制或十六进制的数字。</p>
+</li><li style="line-height:20px;">
+<p style="line-height:25px;">如果&nbsp;<code class="language-javascript" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;color:rgb(221,17,68);border:1px solid rgb(225,225,232);word-spacing:normal;">string</code>&nbsp;以
+ 1 ~ 9 的数字开头，<code class="language-javascript" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;color:rgb(221,17,68);border:1px solid rgb(225,225,232);word-spacing:normal;"><span class="token function">parseInt<span class="token punctuation" style="color:rgb(153,153,153);">(</span></span><span class="token punctuation" style="color:rgb(153,153,153);">)</span></code>&nbsp;将把它解析为十进制的整数。</p>
+</li></ol><h3 style="font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;line-height:40px;color:rgb(85,85,85);font-size:14px;"><a name="t5"></a><a name="t5"></a>
+提示和注释</h3>
+<p style="line-height:25px;color:rgb(85,85,85);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:14px;">
+<strong>注释</strong>：只有字符串中的第一个数字会被返回。</p>
+<p style="line-height:25px;color:rgb(85,85,85);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:14px;">
+<strong>注释</strong>：开头和结尾的空格是允许的。</p>
+<p style="line-height:25px;color:rgb(85,85,85);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:14px;">
+<strong>提示</strong>：如果字符串的第一个字符不能被转换为数字，那么&nbsp;<code class="language-javascript" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;color:rgb(221,17,68);border:1px solid rgb(225,225,232);word-spacing:normal;"><span class="token function">parseInt<span class="token punctuation" style="color:rgb(153,153,153);">(</span></span><span class="token punctuation" style="color:rgb(153,153,153);">)</span></code>&nbsp;会返回&nbsp;<code class="language-javascript" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;color:rgb(221,17,68);border:1px solid rgb(225,225,232);word-spacing:normal;"><span class="token number" style="color:rgb(153,0,85);">NaN</span></code>。</p>
+<h3 style="font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;line-height:40px;color:rgb(85,85,85);font-size:14px;"><a name="t6"></a><a name="t6"></a>
+实例</h3>
+<p style="line-height:25px;color:rgb(85,85,85);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:14px;">
+在本例中，我们将使用&nbsp;<code class="language-javascript" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;color:rgb(221,17,68);border:1px solid rgb(225,225,232);word-spacing:normal;"><span class="token function">parseInt<span class="token punctuation" style="color:rgb(153,153,153);">(</span></span><span class="token punctuation" style="color:rgb(153,153,153);">)</span></code>&nbsp;来解析不同的字符串：</p>
+<pre><code class="language-javascript hljs"><ol class="hljs-ln" style="width:1946px"><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="1"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><code class="language-javascript hljs" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;border:0px;word-spacing:normal;"><span class="token function"><span class="hljs-built_in">parseInt</span><span class="token punctuation" style="color:rgb(153,153,153);">(</span></span><span class="token string" style="color:rgb(102,153,0);"><span class="hljs-string">"10"</span></span><span class="token punctuation" style="color:rgb(153,153,153);">)</span><span class="token punctuation" style="color:rgb(153,153,153);">;</span>        <span class="token comment" style="margin-left:0px;color:rgb(112,128,144);"> <span class="hljs-comment">// 返回 10 (默认十进制)</span></span></code></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="2"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><code class="language-javascript hljs" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;border:0px;word-spacing:normal;"><span class="token function"><span class="hljs-built_in">parseInt</span><span class="token punctuation" style="color:rgb(153,153,153);">(</span></span><span class="token string" style="color:rgb(102,153,0);"><span class="hljs-string">"19"</span></span><span class="token punctuation" style="color:rgb(153,153,153);">,</span><span class="token number" style="color:rgb(153,0,85);"><span class="hljs-number">10</span></span><span class="token punctuation" style="color:rgb(153,153,153);">)</span><span class="token punctuation" style="color:rgb(153,153,153);">;</span>     <span class="token comment" style="margin-left:0px;color:rgb(112,128,144);"> <span class="hljs-comment">// 返回 19 (十进制: 10+9)</span></span></code></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="3"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><code class="language-javascript hljs" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;border:0px;word-spacing:normal;"><span class="token function"><span class="hljs-built_in">parseInt</span><span class="token punctuation" style="color:rgb(153,153,153);">(</span></span><span class="token string" style="color:rgb(102,153,0);"><span class="hljs-string">"11"</span></span><span class="token punctuation" style="color:rgb(153,153,153);">,</span><span class="token number" style="color:rgb(153,0,85);"><span class="hljs-number">2</span></span><span class="token punctuation" style="color:rgb(153,153,153);">)</span><span class="token punctuation" style="color:rgb(153,153,153);">;</span>      <span class="token comment" style="margin-left:0px;color:rgb(112,128,144);"> <span class="hljs-comment">// 返回 3 (二进制: 2+1)</span></span></code></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="4"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><code class="language-javascript hljs" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;border:0px;word-spacing:normal;"><span class="token function"><span class="hljs-built_in">parseInt</span><span class="token punctuation" style="color:rgb(153,153,153);">(</span></span><span class="token string" style="color:rgb(102,153,0);"><span class="hljs-string">"17"</span></span><span class="token punctuation" style="color:rgb(153,153,153);">,</span><span class="token number" style="color:rgb(153,0,85);"><span class="hljs-number">8</span></span><span class="token punctuation" style="color:rgb(153,153,153);">)</span><span class="token punctuation" style="color:rgb(153,153,153);">;</span>      <span class="token comment" style="margin-left:0px;color:rgb(112,128,144);"> <span class="hljs-comment">// 返回 15 (八进制: 8+7)</span></span></code></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="5"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><code class="language-javascript hljs" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;border:0px;word-spacing:normal;"><span class="token function"><span class="hljs-built_in">parseInt</span><span class="token punctuation" style="color:rgb(153,153,153);">(</span></span><span class="token string" style="color:rgb(102,153,0);"><span class="hljs-string">"1f"</span></span><span class="token punctuation" style="color:rgb(153,153,153);">,</span><span class="token number" style="color:rgb(153,0,85);"><span class="hljs-number">16</span></span><span class="token punctuation" style="color:rgb(153,153,153);">)</span><span class="token punctuation" style="color:rgb(153,153,153);">;</span>     <span class="token comment" style="margin-left:0px;color:rgb(112,128,144);"> <span class="hljs-comment">// 返回 31 (十六进制: 16+15)</span></span></code></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="6"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><code class="language-javascript hljs" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;border:0px;word-spacing:normal;"><span class="token function"><span class="hljs-built_in">parseInt</span><span class="token punctuation" style="color:rgb(153,153,153);">(</span></span><span class="token string" style="color:rgb(102,153,0);"><span class="hljs-string">"010"</span></span><span class="token punctuation" style="color:rgb(153,153,153);">)</span><span class="token punctuation" style="color:rgb(153,153,153);">;</span>       <span class="token comment" style="margin-left:0px;color:rgb(112,128,144);"> <span class="hljs-comment">// 未定：返回 10 或 8</span></span></code></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="7"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"></div></div></li></ol></code><div class="hljs-button signin" data-title="登录后复制" onclick="hljs.signin(event)"></div></pre>
+<hr style="border-right-width:0px;border-left-width:0px;border-top-style:solid;border-top-color:rgb(238,238,238);border-bottom-style:solid;border-bottom-color:rgb(255,255,255);color:rgb(85,85,85);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:14px;line-height:25px;"><h2 style="font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;line-height:40px;color:rgb(85,85,85);font-size:16px;"><a name="t7"></a><a name="t7"></a>
+map 方法</h2>
+<p style="line-height:25px;color:rgb(85,85,85);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:14px;">
+对数组的每个元素调用定义的回调函数并返回包含结果的数组。</p>
+<pre><code class="language-javascript hljs"><ol class="hljs-ln" style="width:1946px"><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="1"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><code class="language-javascript hljs" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;border:0px;word-spacing:normal;">array1<span class="token punctuation" style="color:rgb(153,153,153);">.</span><span class="token function">map<span class="token punctuation" style="color:rgb(153,153,153);">(</span></span>callbackfn<span class="token punctuation" style="color:rgb(153,153,153);">[</span><span class="token punctuation" style="color:rgb(153,153,153);">,</span> thisArg<span class="token punctuation" style="color:rgb(153,153,153);">]</span><span class="token punctuation" style="color:rgb(153,153,153);">)</span></code></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="2"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"></div></div></li></ol></code><div class="hljs-button signin" data-title="登录后复制" onclick="hljs.signin(event)"></div></pre>
+<div class="table-box"><table style="border-collapse:collapse;border-spacing:0px;width:700px;color:rgb(85,85,85);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:14px;line-height:25px;"><tbody><tr style="border-top-width:1px;border-top-style:solid;border-top-color:rgb(204,204,204);"><th style="border:1px solid rgb(221,221,221);">参数</th>
+<th style="border:1px solid rgb(221,221,221);">定义</th>
+</tr><tr style="border-top-width:1px;border-top-style:solid;border-top-color:rgb(204,204,204);"><td style="border:1px solid rgb(221,221,221);">array1</td>
+<td style="border:1px solid rgb(221,221,221);">必需。一个数组对象。</td>
+</tr><tr style="border-top-width:1px;border-top-style:solid;border-top-color:rgb(204,204,204);"><td style="border:1px solid rgb(221,221,221);">callbackfn</td>
+<td style="border:1px solid rgb(221,221,221);">必需。一个接受**最多**三个参数的函数。对于数组中的每个元素，‘map‘ 方法都会调用 ‘callbackfn‘ 函数一次。</td>
+</tr><tr style="border-top-width:1px;border-top-style:solid;border-top-color:rgb(204,204,204);"><td style="border:1px solid rgb(221,221,221);">thisArg</td>
+<td style="border:1px solid rgb(221,221,221);">可选。可在 ‘callbackfn‘ 函数中为其引用 ‘this‘ 关键字的对象。如果省略 ‘thisArg‘，则 ‘undefined‘ 将用作 ‘this‘ 值。</td>
+</tr></tbody></table></div><h3 style="font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;line-height:40px;color:rgb(85,85,85);font-size:14px;"><a name="t8"></a><a name="t8"></a>
+返回值</h3>
+<p style="line-height:25px;color:rgb(85,85,85);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:14px;">
+其中的每个元素均为关联的原始数组元素的回调函数返回值的新数组。</p>
+<h3 style="font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;line-height:40px;color:rgb(85,85,85);font-size:14px;"><a name="t9"></a><a name="t9"></a>
+异常</h3>
+<p style="line-height:25px;color:rgb(85,85,85);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:14px;">
+如果&nbsp;<code class="language-javascript" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;color:rgb(221,17,68);border:1px solid rgb(225,225,232);word-spacing:normal;">callbackfn</code>&nbsp;参数不是函数对象，则将引发&nbsp;<code class="language-javascript" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;color:rgb(221,17,68);border:1px solid rgb(225,225,232);word-spacing:normal;">TypeError</code>&nbsp;异常。</p>
+<h3 style="font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;line-height:40px;color:rgb(85,85,85);font-size:14px;"><a name="t10"></a><a name="t10"></a>
+备注</h3>
+<p style="line-height:25px;color:rgb(85,85,85);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:14px;">
+对于数组中的每个元素，<code class="language-javascript" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;color:rgb(221,17,68);border:1px solid rgb(225,225,232);word-spacing:normal;">map</code>&nbsp;方法都会调用&nbsp;<code class="language-javascript" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;color:rgb(221,17,68);border:1px solid rgb(225,225,232);word-spacing:normal;">callbackfn</code>&nbsp;函数一次（采用升序索引顺序）。
+ 不为数组中缺少的元素调用该回调函数。</p>
+<p style="line-height:25px;color:rgb(85,85,85);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:14px;">
+除了数组对象之外，<code class="language-javascript" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;color:rgb(221,17,68);border:1px solid rgb(225,225,232);word-spacing:normal;">map</code>&nbsp;方法可由具有&nbsp;<code class="language-javascript" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;color:rgb(221,17,68);border:1px solid rgb(225,225,232);word-spacing:normal;">length</code>&nbsp;属性且具有已按数字编制索引的属性名的任何对象使用。</p>
+<h3 style="font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;line-height:40px;color:rgb(85,85,85);font-size:14px;"><a name="t11"></a><a name="t11"></a>
+回调函数语法</h3>
+<p style="line-height:25px;color:rgb(85,85,85);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:14px;">
+回调函数的语法如下所示：</p>
+<pre><code class="language-javascript hljs"><ol class="hljs-ln" style="width:1946px"><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="1"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><code class="language-javascript hljs" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;border:0px;word-spacing:normal;"><span class="token keyword" style="color:rgb(0,119,170);"><span class="hljs-function"><span class="hljs-keyword">function</span></span></span><span class="hljs-function"> </span><span class="token function"><span class="hljs-function"><span class="hljs-title">callbackfn</span></span><span class="token punctuation" style="color:rgb(153,153,153);"><span class="hljs-function">(</span></span></span><span class="hljs-function"><span class="hljs-params">value</span></span><span class="token punctuation" style="color:rgb(153,153,153);"><span class="hljs-function"><span class="hljs-params">,</span></span></span><span class="hljs-function"><span class="hljs-params"> index</span></span><span class="token punctuation" style="color:rgb(153,153,153);"><span class="hljs-function"><span class="hljs-params">,</span></span></span><span class="hljs-function"><span class="hljs-params"> array1</span></span><span class="token punctuation" style="color:rgb(153,153,153);"><span class="hljs-function">)</span></span><span class="hljs-function"></span></code></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="2"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"></div></div></li></ol></code><div class="hljs-button signin" data-title="登录后复制" onclick="hljs.signin(event)"></div></pre>
+<p style="line-height:25px;color:rgb(85,85,85);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:14px;">
+可使用<strong>最多</strong>三个参数来声明回调函数。</p>
+<p style="line-height:25px;color:rgb(85,85,85);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:14px;">
+下表列出了回调函数参数。</p>
+<div class="table-box"><table style="border-collapse:collapse;border-spacing:0px;width:700px;color:rgb(85,85,85);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:14px;line-height:25px;"><tbody><tr style="border-top-width:1px;border-top-style:solid;border-top-color:rgb(204,204,204);"><th style="border:1px solid rgb(221,221,221);">回调参数</th>
+<th style="border:1px solid rgb(221,221,221);">定义</th>
+</tr><tr style="border-top-width:1px;border-top-style:solid;border-top-color:rgb(204,204,204);"><td style="border:1px solid rgb(221,221,221);">value</td>
+<td style="border:1px solid rgb(221,221,221);">数组元素的值。</td>
+</tr><tr style="border-top-width:1px;border-top-style:solid;border-top-color:rgb(204,204,204);"><td style="border:1px solid rgb(221,221,221);">index</td>
+<td style="border:1px solid rgb(221,221,221);">数组元素的数字索引。</td>
+</tr><tr style="border-top-width:1px;border-top-style:solid;border-top-color:rgb(204,204,204);"><td style="border:1px solid rgb(221,221,221);">array1</td>
+<td style="border:1px solid rgb(221,221,221);">包含该元素的数组对象。</td>
+</tr></tbody></table></div><h3 style="font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;line-height:40px;color:rgb(85,85,85);font-size:14px;"><a name="t12"></a><a name="t12"></a>
+修改数组对象</h3>
+<p style="line-height:25px;color:rgb(85,85,85);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:14px;">
+数组对象可由回调函数修改。</p>
+<p style="line-height:25px;color:rgb(85,85,85);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:14px;">
+下表描述了在&nbsp;<code class="language-javascript" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;color:rgb(221,17,68);border:1px solid rgb(225,225,232);word-spacing:normal;">map</code>&nbsp;方法启动后修改数组对象所获得的结果。</p>
+<div class="table-box"><table style="border-collapse:collapse;border-spacing:0px;width:700px;color:rgb(85,85,85);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:14px;line-height:25px;"><tbody><tr style="border-top-width:1px;border-top-style:solid;border-top-color:rgb(204,204,204);"><th style="border:1px solid rgb(221,221,221);">‘map‘ 方法启动后的条件</th>
+<th style="border:1px solid rgb(221,221,221);">元素是否传递给回调函数</th>
+</tr><tr style="border-top-width:1px;border-top-style:solid;border-top-color:rgb(204,204,204);"><td style="border:1px solid rgb(221,221,221);">在数组的原始长度之外添加元素。</td>
+<td style="border:1px solid rgb(221,221,221);">否。</td>
+</tr><tr style="border-top-width:1px;border-top-style:solid;border-top-color:rgb(204,204,204);"><td style="border:1px solid rgb(221,221,221);">添加元素以填充数组中缺少的元素。</td>
+<td style="border:1px solid rgb(221,221,221);">是，如果该索引尚未传递给回调函数。</td>
+</tr><tr style="border-top-width:1px;border-top-style:solid;border-top-color:rgb(204,204,204);"><td style="border:1px solid rgb(221,221,221);">元素被更改。</td>
+<td style="border:1px solid rgb(221,221,221);">是，如果该元素尚未传递给回调函数。</td>
+</tr><tr style="border-top-width:1px;border-top-style:solid;border-top-color:rgb(204,204,204);"><td style="border:1px solid rgb(221,221,221);">从数组中删除元素。</td>
+<td style="border:1px solid rgb(221,221,221);">否，除非该元素已传递给回调函数。</td>
+</tr></tbody></table></div><h3 style="font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;line-height:40px;color:rgb(85,85,85);font-size:14px;"><a name="t13"></a><a name="t13"></a>
+示例</h3>
+<p style="line-height:25px;color:rgb(85,85,85);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:14px;">
+下面的示例阐释了&nbsp;<code class="language-javascript" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;color:rgb(221,17,68);border:1px solid rgb(225,225,232);word-spacing:normal;">map</code>&nbsp;方法的用法。</p>
+<pre><code class="language-javascript hljs"><ol class="hljs-ln" style="width:1946px"><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="1"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><code class="language-javascript hljs" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;border:0px;word-spacing:normal;"><span class="token comment" style="margin-left:0px;color:rgb(112,128,144);"><span class="hljs-comment">// 定义回调函数</span></span></code></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="2"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><code class="language-javascript hljs" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;border:0px;word-spacing:normal;"><span class="token comment" style="margin-left:0px;color:rgb(112,128,144);"><span class="hljs-comment">// 计算圆的面积</span></span></code></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="3"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><code class="language-javascript hljs" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;border:0px;word-spacing:normal;"><span class="token keyword" style="color:rgb(0,119,170);"><span class="hljs-function"><span class="hljs-keyword">function</span></span></span><span class="hljs-function"> </span><span class="token function"><span class="hljs-function"><span class="hljs-title">AreaOfCircle</span></span><span class="token punctuation" style="color:rgb(153,153,153);"><span class="hljs-function">(</span></span></span><span class="hljs-function"><span class="hljs-params">radius</span></span><span class="token punctuation" style="color:rgb(153,153,153);"><span class="hljs-function">)</span></span><span class="hljs-function"> </span><span class="token punctuation" style="color:rgb(153,153,153);">&#123;</span> </code></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="4"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><code class="language-javascript hljs" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;border:0px;word-spacing:normal;">    <span class="token keyword" style="color:rgb(0,119,170);"><span class="hljs-keyword">var</span></span> area <span class="token operator" style="color:rgb(166,127,89);">=</span> <span class="hljs-built_in">Math</span><span class="token punctuation" style="color:rgb(153,153,153);">.</span>PI <span class="token operator" style="color:rgb(166,127,89);">*</span> <span class="token punctuation" style="color:rgb(153,153,153);">(</span>radius <span class="token operator" style="color:rgb(166,127,89);">*</span> radius<span class="token punctuation" style="color:rgb(153,153,153);">)</span><span class="token punctuation" style="color:rgb(153,153,153);">;</span> </code></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="5"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><code class="language-javascript hljs" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;border:0px;word-spacing:normal;">    <span class="token keyword" style="color:rgb(0,119,170);"><span class="hljs-keyword">return</span></span> area<span class="token punctuation" style="color:rgb(153,153,153);">.</span><span class="token function">toFixed<span class="token punctuation" style="color:rgb(153,153,153);">(</span></span><span class="token number" style="color:rgb(153,0,85);"><span class="hljs-number">0</span></span><span class="token punctuation" style="color:rgb(153,153,153);">)</span><span class="token punctuation" style="color:rgb(153,153,153);">;</span> </code></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="6"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><code class="language-javascript hljs" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;border:0px;word-spacing:normal;"><span class="token punctuation" style="color:rgb(153,153,153);">&#125;</span> </code></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="7"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><code class="language-javascript hljs" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;border:0px;word-spacing:normal;"><span class="token comment" style="margin-left:0px;color:rgb(112,128,144);"></span></code></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="8"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><code class="language-javascript hljs" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;border:0px;word-spacing:normal;"><span class="hljs-comment">// 定义一个数组，保护三个元素</span></code></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="9"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><code class="language-javascript hljs" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;border:0px;word-spacing:normal;"><span class="token keyword" style="color:rgb(0,119,170);"><span class="hljs-keyword">var</span></span> radii <span class="token operator" style="color:rgb(166,127,89);">=</span> <span class="token punctuation" style="color:rgb(153,153,153);">[</span><span class="token number" style="color:rgb(153,0,85);"><span class="hljs-number">10</span></span><span class="token punctuation" style="color:rgb(153,153,153);">,</span> <span class="token number" style="color:rgb(153,0,85);"><span class="hljs-number">20</span></span><span class="token punctuation" style="color:rgb(153,153,153);">,</span> <span class="token number" style="color:rgb(153,0,85);"><span class="hljs-number">30</span></span><span class="token punctuation" style="color:rgb(153,153,153);">]</span><span class="token punctuation" style="color:rgb(153,153,153);">;</span> </code></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="10"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><code class="language-javascript hljs" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;border:0px;word-spacing:normal;"><span class="token comment" style="margin-left:0px;color:rgb(112,128,144);"></span></code></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="11"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><code class="language-javascript hljs" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;border:0px;word-spacing:normal;"><span class="hljs-comment">// 计算 radii 的面积. </span></code></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="12"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><code class="language-javascript hljs" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;border:0px;word-spacing:normal;"><span class="token keyword" style="color:rgb(0,119,170);"><span class="hljs-keyword">var</span></span> areas <span class="token operator" style="color:rgb(166,127,89);">=</span> radii<span class="token punctuation" style="color:rgb(153,153,153);">.</span><span class="token function">map<span class="token punctuation" style="color:rgb(153,153,153);">(</span></span>AreaOfCircle<span class="token punctuation" style="color:rgb(153,153,153);">)</span><span class="token punctuation" style="color:rgb(153,153,153);">;</span> </code></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="13"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><code class="language-javascript hljs" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;border:0px;word-spacing:normal;"> </code></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="14"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><code class="language-javascript hljs" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;border:0px;word-spacing:normal;"><span class="hljs-built_in">document</span><span class="token punctuation" style="color:rgb(153,153,153);">.</span><span class="token function">write<span class="token punctuation" style="color:rgb(153,153,153);">(</span></span>areas<span class="token punctuation" style="color:rgb(153,153,153);">)</span><span class="token punctuation" style="color:rgb(153,153,153);">;</span> </code></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="15"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><code class="language-javascript hljs" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;border:0px;word-spacing:normal;"><span class="token comment" style="margin-left:0px;color:rgb(112,128,144);"></span></code></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="16"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><code class="language-javascript hljs" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;border:0px;word-spacing:normal;"><span class="hljs-comment">// 输出: </span></code></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="17"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><code class="language-javascript hljs" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;border:0px;word-spacing:normal;"><span class="token comment" style="margin-left:0px;color:rgb(112,128,144);"><span class="hljs-comment">// 314,1257,2827</span></span></code></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="18"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"></div></div></li></ol></code><div class="hljs-button signin" data-title="登录后复制" onclick="hljs.signin(event)"></div></pre>
+<p style="line-height:25px;color:rgb(85,85,85);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:14px;">
+下面的示例阐释&nbsp;<code class="language-javascript" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;color:rgb(221,17,68);border:1px solid rgb(225,225,232);word-spacing:normal;">thisArg</code>&nbsp;参数的用法，该参数指定对其引用&nbsp;<code class="language-javascript" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;color:rgb(221,17,68);border:1px solid rgb(225,225,232);word-spacing:normal;">this</code>&nbsp;关键字的对象。</p>
+<pre><code class="language-javascript hljs"><ol class="hljs-ln" style="width:1946px"><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="1"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><code class="language-javascript hljs" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;border:0px;word-spacing:normal;"><span class="token comment" style="margin-left:0px;color:rgb(112,128,144);"><span class="hljs-comment">// 定义一个对象 object，保护 divisor 属性和 remainder 方法</span></span></code></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="2"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><code class="language-javascript hljs" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;border:0px;word-spacing:normal;"><span class="token comment" style="margin-left:0px;color:rgb(112,128,144);"><span class="hljs-comment">// remainder 函数求每个传入的值的个位数。（即除以 10 取余数）</span></span></code></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="3"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><code class="language-javascript hljs" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;border:0px;word-spacing:normal;"><span class="token keyword" style="color:rgb(0,119,170);"><span class="hljs-keyword">var</span></span> obj <span class="token operator" style="color:rgb(166,127,89);">=</span> <span class="token punctuation" style="color:rgb(153,153,153);">&#123;</span> </code></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="4"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><code class="language-javascript hljs" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;border:0px;word-spacing:normal;">    <span class="hljs-attr">divisor</span><span class="token punctuation" style="color:rgb(153,153,153);">:</span> <span class="token number" style="color:rgb(153,0,85);"><span class="hljs-number">10</span></span><span class="token punctuation" style="color:rgb(153,153,153);">,</span> </code></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="5"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><code class="language-javascript hljs" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;border:0px;word-spacing:normal;">    <span class="hljs-attr">remainder</span><span class="token punctuation" style="color:rgb(153,153,153);">:</span> <span class="token keyword" style="color:rgb(0,119,170);"><span class="hljs-function"><span class="hljs-keyword">function</span></span></span><span class="hljs-function"> </span><span class="token punctuation" style="color:rgb(153,153,153);"><span class="hljs-function">(</span></span><span class="hljs-function"><span class="hljs-params">value</span></span><span class="token punctuation" style="color:rgb(153,153,153);"><span class="hljs-function">)</span></span><span class="hljs-function"> </span><span class="token punctuation" style="color:rgb(153,153,153);">&#123;</span> </code></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="6"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><code class="language-javascript hljs" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;border:0px;word-spacing:normal;">        <span class="token keyword" style="color:rgb(0,119,170);"><span class="hljs-keyword">return</span></span> value <span class="token operator" style="color:rgb(166,127,89);">%</span> <span class="hljs-built_in">this</span><span class="token punctuation" style="color:rgb(153,153,153);">.</span>divisor<span class="token punctuation" style="color:rgb(153,153,153);">;</span> </code></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="7"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><code class="language-javascript hljs" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;border:0px;word-spacing:normal;">    <span class="token punctuation" style="color:rgb(153,153,153);">&#125;</span> </code></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="8"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><code class="language-javascript hljs" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;border:0px;word-spacing:normal;"><span class="token punctuation" style="color:rgb(153,153,153);">&#125;</span> </code></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="9"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><code class="language-javascript hljs" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;border:0px;word-spacing:normal;"><span class="token comment" style="margin-left:0px;color:rgb(112,128,144);"></span></code></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="10"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><code class="language-javascript hljs" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;border:0px;word-spacing:normal;"><span class="hljs-comment">// 定义一个包含 4 个元素的数组</span></code></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="11"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><code class="language-javascript hljs" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;border:0px;word-spacing:normal;"><span class="token keyword" style="color:rgb(0,119,170);"><span class="hljs-keyword">var</span></span> numbers <span class="token operator" style="color:rgb(166,127,89);">=</span> <span class="token punctuation" style="color:rgb(153,153,153);">[</span><span class="token number" style="color:rgb(153,0,85);"><span class="hljs-number">6</span></span><span class="token punctuation" style="color:rgb(153,153,153);">,</span> <span class="token number" style="color:rgb(153,0,85);"><span class="hljs-number">12</span></span><span class="token punctuation" style="color:rgb(153,153,153);">,</span> <span class="token number" style="color:rgb(153,0,85);"><span class="hljs-number">25</span></span><span class="token punctuation" style="color:rgb(153,153,153);">,</span> <span class="token number" style="color:rgb(153,0,85);"><span class="hljs-number">30</span></span><span class="token punctuation" style="color:rgb(153,153,153);">]</span><span class="token punctuation" style="color:rgb(153,153,153);">;</span> </code></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="12"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><code class="language-javascript hljs" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;border:0px;word-spacing:normal;"><span class="token comment" style="margin-left:0px;color:rgb(112,128,144);"></span></code></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="13"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><code class="language-javascript hljs" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;border:0px;word-spacing:normal;"><span class="hljs-comment">// 对 numbers 数组的每个元素调用 obj 对象的 remainder 函数。</span></code></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="14"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><code class="language-javascript hljs" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;border:0px;word-spacing:normal;"><span class="token comment" style="margin-left:0px;color:rgb(112,128,144);"><span class="hljs-comment">// map 函数的第 2 个参数传入 ogj。 </span></span></code></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="15"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><code class="language-javascript hljs" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;border:0px;word-spacing:normal;"><span class="token keyword" style="color:rgb(0,119,170);"><span class="hljs-keyword">var</span></span> result <span class="token operator" style="color:rgb(166,127,89);">=</span> numbers<span class="token punctuation" style="color:rgb(153,153,153);">.</span><span class="token function">map<span class="token punctuation" style="color:rgb(153,153,153);">(</span></span>obj<span class="token punctuation" style="color:rgb(153,153,153);">.</span>remainder<span class="token punctuation" style="color:rgb(153,153,153);">,</span> obj<span class="token punctuation" style="color:rgb(153,153,153);">)</span><span class="token punctuation" style="color:rgb(153,153,153);">;</span> </code></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="16"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><code class="language-javascript hljs" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;border:0px;word-spacing:normal;"><span class="hljs-built_in">document</span><span class="token punctuation" style="color:rgb(153,153,153);">.</span><span class="token function">write<span class="token punctuation" style="color:rgb(153,153,153);">(</span></span>result<span class="token punctuation" style="color:rgb(153,153,153);">)</span><span class="token punctuation" style="color:rgb(153,153,153);">;</span> </code></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="17"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><code class="language-javascript hljs" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;border:0px;word-spacing:normal;"><span class="token comment" style="margin-left:0px;color:rgb(112,128,144);"></span></code></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="18"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><code class="language-javascript hljs" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;border:0px;word-spacing:normal;"><span class="hljs-comment">// 输出: </span></code></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="19"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><code class="language-javascript hljs" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;border:0px;word-spacing:normal;"><span class="token comment" style="margin-left:0px;color:rgb(112,128,144);"><span class="hljs-comment">// 6,2,5,0</span></span></code></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="20"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"></div></div></li></ol></code><div class="hljs-button signin" data-title="登录后复制" onclick="hljs.signin(event)"></div></pre>
+<p style="line-height:25px;color:rgb(85,85,85);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:14px;">
+在下面的示例中，内置 JavaScript 方法用作回调函数。</p>
+<pre><code class="language-javascript hljs"><ol class="hljs-ln" style="width:1946px"><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="1"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><code class="language-javascript hljs" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;border:0px;word-spacing:normal;"><span class="token comment" style="margin-left:0px;color:rgb(112,128,144);"><span class="hljs-comment">// 对数组中的每个元素调用 Math.sqrt(value) （求平方根）</span></span></code></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="2"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><code class="language-javascript hljs" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;border:0px;word-spacing:normal;"><span class="token keyword" style="color:rgb(0,119,170);"><span class="hljs-keyword">var</span></span> numbers <span class="token operator" style="color:rgb(166,127,89);">=</span> <span class="token punctuation" style="color:rgb(153,153,153);">[</span><span class="token number" style="color:rgb(153,0,85);"><span class="hljs-number">9</span></span><span class="token punctuation" style="color:rgb(153,153,153);">,</span> <span class="token number" style="color:rgb(153,0,85);"><span class="hljs-number">16</span></span><span class="token punctuation" style="color:rgb(153,153,153);">]</span><span class="token punctuation" style="color:rgb(153,153,153);">;</span> </code></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="3"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><code class="language-javascript hljs" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;border:0px;word-spacing:normal;"><span class="token keyword" style="color:rgb(0,119,170);"><span class="hljs-keyword">var</span></span> result <span class="token operator" style="color:rgb(166,127,89);">=</span> numbers<span class="token punctuation" style="color:rgb(153,153,153);">.</span><span class="token function">map<span class="token punctuation" style="color:rgb(153,153,153);">(</span></span><span class="hljs-built_in">Math</span><span class="token punctuation" style="color:rgb(153,153,153);">.</span>sqrt<span class="token punctuation" style="color:rgb(153,153,153);">)</span><span class="token punctuation" style="color:rgb(153,153,153);">;</span> </code></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="4"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><code class="language-javascript hljs" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;border:0px;word-spacing:normal;"> </code></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="5"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><code class="language-javascript hljs" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;border:0px;word-spacing:normal;"><span class="hljs-built_in">document</span><span class="token punctuation" style="color:rgb(153,153,153);">.</span><span class="token function">write<span class="token punctuation" style="color:rgb(153,153,153);">(</span></span>result<span class="token punctuation" style="color:rgb(153,153,153);">)</span><span class="token punctuation" style="color:rgb(153,153,153);">;</span> <span class="token comment" style="margin-left:0px;color:rgb(112,128,144);"></span></code></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="6"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><code class="language-javascript hljs" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;border:0px;word-spacing:normal;"><span class="hljs-comment">// 输出: 3,4</span></code></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="7"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"></div></div></li></ol></code><div class="hljs-button signin" data-title="登录后复制" onclick="hljs.signin(event)"></div></pre>
+<p style="line-height:25px;color:rgb(85,85,85);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:14px;">
+<code class="language-javascript" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;color:rgb(221,17,68);border:1px solid rgb(225,225,232);word-spacing:normal;"><span class="token punctuation" style="color:rgb(153,153,153);">[</span><span class="token number" style="color:rgb(153,0,85);">9</span><span class="token punctuation" style="color:rgb(153,153,153);">,</span><span class="token number" style="color:rgb(153,0,85);">16</span><span class="token punctuation" style="color:rgb(153,153,153);">]</span><span class="token punctuation" style="color:rgb(153,153,153);">.</span><span class="token function">map<span class="token punctuation" style="color:rgb(153,153,153);">(</span></span>Math<span class="token punctuation" style="color:rgb(153,153,153);">.</span>sqrt<span class="token punctuation" style="color:rgb(153,153,153);">)</span></code>&nbsp;回调函数，输出的结果是&nbsp;<code class="language-javascript" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;color:rgb(221,17,68);border:1px solid rgb(225,225,232);word-spacing:normal;"><span class="token punctuation" style="color:rgb(153,153,153);">[</span><span class="token number" style="color:rgb(153,0,85);">3</span><span class="token punctuation" style="color:rgb(153,153,153);">,</span><span class="token number" style="color:rgb(153,0,85);">4</span><span class="token punctuation" style="color:rgb(153,153,153);">]</span></code>。
+ 但是为什么&nbsp;<code class="language-javascript" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;color:rgb(221,17,68);border:1px solid rgb(225,225,232);word-spacing:normal;"><span class="token punctuation" style="color:rgb(153,153,153);">[</span><span class="token string" style="color:rgb(102,153,0);">"1"</span><span class="token punctuation" style="color:rgb(153,153,153);">,</span><span class="token string" style="color:rgb(102,153,0);">"2"</span><span class="token punctuation" style="color:rgb(153,153,153);">,</span><span class="token string" style="color:rgb(102,153,0);">"3"</span><span class="token punctuation" style="color:rgb(153,153,153);">]</span><span class="token punctuation" style="color:rgb(153,153,153);">.</span><span class="token function">map<span class="token punctuation" style="color:rgb(153,153,153);">(</span></span>parseInt<span class="token punctuation" style="color:rgb(153,153,153);">)</span></code>&nbsp;却返回&nbsp;<code class="language-javascript" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;color:rgb(221,17,68);border:1px solid rgb(225,225,232);word-spacing:normal;"><span class="token punctuation" style="color:rgb(153,153,153);">[</span><span class="token number" style="color:rgb(153,0,85);">1</span><span class="token punctuation" style="color:rgb(153,153,153);">,</span><span class="token number" style="color:rgb(153,0,85);">NaN</span><span class="token punctuation" style="color:rgb(153,153,153);">,</span><span class="token number" style="color:rgb(153,0,85);">NaN</span><span class="token punctuation" style="color:rgb(153,153,153);">]</span></code>？</p>
+<p style="line-height:25px;color:rgb(85,85,85);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:14px;">
+网站给出的提示是：</p>
+<blockquote style="border-left-width:5px;border-left-style:solid;border-left-color:rgb(238,238,238);color:rgb(85,85,85);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:14px;line-height:25px;">
+<p style="font-size:12px;">what you actually get is&nbsp;<code class="language-javascript" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;color:rgb(221,17,68);border:1px solid rgb(225,225,232);word-spacing:normal;"><span class="token punctuation" style="color:rgb(153,153,153);">[</span><span class="token number" style="color:rgb(153,0,85);">1</span><span class="token punctuation" style="color:rgb(153,153,153);">,</span><span class="token number" style="color:rgb(153,0,85);">NaN</span><span class="token punctuation" style="color:rgb(153,153,153);">,</span><span class="token number" style="color:rgb(153,0,85);">NaN</span><span class="token punctuation" style="color:rgb(153,153,153);">]</span></code>&nbsp;because&nbsp;<code class="language-javascript" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;color:rgb(221,17,68);border:1px solid rgb(225,225,232);word-spacing:normal;">parseInt</code>&nbsp;takes
+ two parameters&nbsp;<code class="language-javascript" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;color:rgb(221,17,68);border:1px solid rgb(225,225,232);word-spacing:normal;"><span class="token punctuation" style="color:rgb(153,153,153);">(</span>val<span class="token punctuation" style="color:rgb(153,153,153);">,</span>
+ radix<span class="token punctuation" style="color:rgb(153,153,153);">)</span></code>&nbsp;and&nbsp;<code class="language-javascript" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;color:rgb(221,17,68);border:1px solid rgb(225,225,232);word-spacing:normal;">map</code>&nbsp;passes
+ 3&nbsp;<code class="language-javascript" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;color:rgb(221,17,68);border:1px solid rgb(225,225,232);word-spacing:normal;"><span class="token punctuation" style="color:rgb(153,153,153);">(</span>element<span class="token punctuation" style="color:rgb(153,153,153);">,</span>
+ index<span class="token punctuation" style="color:rgb(153,153,153);">,</span> array<span class="token punctuation" style="color:rgb(153,153,153);">)</span></code></p>
+</blockquote>
+<p style="line-height:25px;color:rgb(85,85,85);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:14px;">
+简单翻译一下就是</p>
+<blockquote style="border-left-width:5px;border-left-style:solid;border-left-color:rgb(238,238,238);color:rgb(85,85,85);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:14px;line-height:25px;">
+<p style="font-size:12px;"><code class="language-javascript" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;color:rgb(221,17,68);border:1px solid rgb(225,225,232);word-spacing:normal;">parseInt</code>&nbsp;需要
+ 2 个参数&nbsp;<code class="language-javascript" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;color:rgb(221,17,68);border:1px solid rgb(225,225,232);word-spacing:normal;"><span class="token punctuation" style="color:rgb(153,153,153);">(</span>val<span class="token punctuation" style="color:rgb(153,153,153);">,</span>
+ radix<span class="token punctuation" style="color:rgb(153,153,153);">)</span></code>， 而&nbsp;<code class="language-javascript" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;color:rgb(221,17,68);border:1px solid rgb(225,225,232);word-spacing:normal;">map</code>&nbsp;传递了
+ 3 个参数&nbsp;<code class="language-javascript" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;color:rgb(221,17,68);border:1px solid rgb(225,225,232);word-spacing:normal;"><span class="token punctuation" style="color:rgb(153,153,153);">(</span>element<span class="token punctuation" style="color:rgb(153,153,153);">,</span>
+ index<span class="token punctuation" style="color:rgb(153,153,153);">,</span> array<span class="token punctuation" style="color:rgb(153,153,153);">)</span></code>」。</p>
+</blockquote>
+<hr style="border-right-width:0px;border-left-width:0px;border-top-style:solid;border-top-color:rgb(238,238,238);border-bottom-style:solid;border-bottom-color:rgb(255,255,255);color:rgb(85,85,85);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:14px;line-height:25px;"><p style="line-height:25px;color:rgb(85,85,85);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:14px;">
+通过上面的解释，我们可以看出，如果想让&nbsp;<code class="language-javascript" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;color:rgb(221,17,68);border:1px solid rgb(225,225,232);word-spacing:normal;"><span class="token function">parseInt<span class="token punctuation" style="color:rgb(153,153,153);">(</span></span>string<span class="token punctuation" style="color:rgb(153,153,153);">,</span>
+ radix<span class="token punctuation" style="color:rgb(153,153,153);">)</span></code>&nbsp;返回 NaN，有两种情况：</p>
+<ol style="color:rgb(85,85,85);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:14px;line-height:25px;"><li style="line-height:20px;">
+<p style="line-height:25px;">第一个参数不能转换成数字。</p>
+</li><li style="line-height:20px;">
+<p style="line-height:25px;">第二个参数不在 2 到 36 之间。</p>
+</li></ol><p style="line-height:25px;color:rgb(85,85,85);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:14px;">
+我们传入的参数都能转换成数字，所以只能是第二种可能。</p>
+<p style="line-height:25px;color:rgb(85,85,85);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:14px;">
+到底是不是呢？我们重新定义&nbsp;<code class="language-javascript" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;color:rgb(221,17,68);border:1px solid rgb(225,225,232);word-spacing:normal;"><span class="token function">parseInt<span class="token punctuation" style="color:rgb(153,153,153);">(</span></span>string<span class="token punctuation" style="color:rgb(153,153,153);">,</span>
+ radix<span class="token punctuation" style="color:rgb(153,153,153);">)</span></code>&nbsp;函数：</p>
+<pre><code class="language-javascript hljs"><ol class="hljs-ln" style="width:1946px"><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="1"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><code class="language-javascript hljs" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;border:0px;word-spacing:normal;"><span class="token keyword" style="color:rgb(0,119,170);"><span class="hljs-keyword">var</span></span> <span class="hljs-built_in">parseInt</span> <span class="token operator" style="color:rgb(166,127,89);">=</span> <span class="token keyword" style="color:rgb(0,119,170);"><span class="hljs-function"><span class="hljs-keyword">function</span></span></span><span class="token punctuation" style="color:rgb(153,153,153);"><span class="hljs-function">(</span></span><span class="hljs-function"><span class="hljs-params">string</span></span><span class="token punctuation" style="color:rgb(153,153,153);"><span class="hljs-function"><span class="hljs-params">,</span></span></span><span class="hljs-function"><span class="hljs-params"> radix</span></span><span class="token punctuation" style="color:rgb(153,153,153);"><span class="hljs-function">)</span></span><span class="hljs-function"> </span><span class="token punctuation" style="color:rgb(153,153,153);">&#123;</span></code></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="2"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><code class="language-javascript hljs" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;border:0px;word-spacing:normal;">    <span class="token keyword" style="color:rgb(0,119,170);"><span class="hljs-keyword">return</span></span> string <span class="token operator" style="color:rgb(166,127,89);">+</span> <span class="token string" style="color:rgb(102,153,0);"><span class="hljs-string">"-"</span></span> <span class="token operator" style="color:rgb(166,127,89);">+</span> radix<span class="token punctuation" style="color:rgb(153,153,153);">;</span></code></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="3"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><code class="language-javascript hljs" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;border:0px;word-spacing:normal;"><span class="token punctuation" style="color:rgb(153,153,153);">&#125;</span><span class="token punctuation" style="color:rgb(153,153,153);">;</span></code></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="4"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><code class="language-javascript hljs" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;border:0px;word-spacing:normal;"> </code></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="5"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><code class="language-javascript hljs" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;border:0px;word-spacing:normal;"><span class="token punctuation" style="color:rgb(153,153,153);">[</span><span class="token string" style="color:rgb(102,153,0);"><span class="hljs-string">"1"</span></span><span class="token punctuation" style="color:rgb(153,153,153);">,</span> <span class="token string" style="color:rgb(102,153,0);"><span class="hljs-string">"2"</span></span><span class="token punctuation" style="color:rgb(153,153,153);">,</span> <span class="token string" style="color:rgb(102,153,0);"><span class="hljs-string">"3"</span></span><span class="token punctuation" style="color:rgb(153,153,153);">]</span><span class="token punctuation" style="color:rgb(153,153,153);">.</span><span class="token function">map<span class="token punctuation" style="color:rgb(153,153,153);">(</span></span><span class="hljs-built_in">parseInt</span><span class="token punctuation" style="color:rgb(153,153,153);">)</span><span class="token punctuation" style="color:rgb(153,153,153);">;</span></code></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="6"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"></div></div></li></ol></code><div class="hljs-button signin" data-title="登录后复制" onclick="hljs.signin(event)"></div></pre>
+<p style="line-height:25px;color:rgb(85,85,85);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:14px;">
+输出结果为：</p>
+<pre><code class="language-javascript hljs"><ol class="hljs-ln" style="width:1946px"><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="1"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><code class="language-javascript hljs" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;border:0px;word-spacing:normal;"><span class="token punctuation" style="color:rgb(153,153,153);">[</span><span class="token string" style="color:rgb(102,153,0);"><span class="hljs-string">"1-0"</span></span><span class="token punctuation" style="color:rgb(153,153,153);">,</span> <span class="token string" style="color:rgb(102,153,0);"><span class="hljs-string">"2-1"</span></span><span class="token punctuation" style="color:rgb(153,153,153);">,</span> <span class="token string" style="color:rgb(102,153,0);"><span class="hljs-string">"3-2"</span></span><span class="token punctuation" style="color:rgb(153,153,153);">]</span></code></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="2"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"></div></div></li></ol></code><div class="hljs-button signin" data-title="登录后复制" onclick="hljs.signin(event)"></div></pre>
+<p style="line-height:25px;color:rgb(85,85,85);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:14px;">
+看见，<code class="language-javascript" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;color:rgb(221,17,68);border:1px solid rgb(225,225,232);word-spacing:normal;">map</code>&nbsp;函数将数组的值&nbsp;<code class="language-javascript" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;color:rgb(221,17,68);border:1px solid rgb(225,225,232);word-spacing:normal;">value</code>&nbsp;传递给了&nbsp;<code class="language-javascript" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;color:rgb(221,17,68);border:1px solid rgb(225,225,232);word-spacing:normal;">parseInt</code>&nbsp;的第一个参数，将数组的索引传递给了第二个参数。
+ 第三个参数呢？我们再加一个参数</p>
+<pre><code class="language-javascript hljs"><ol class="hljs-ln" style="width:1946px"><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="1"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><code class="language-javascript hljs" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;border:0px;word-spacing:normal;"><span class="token keyword" style="color:rgb(0,119,170);"><span class="hljs-keyword">var</span></span> <span class="hljs-built_in">parseInt</span> <span class="token operator" style="color:rgb(166,127,89);">=</span> <span class="token keyword" style="color:rgb(0,119,170);"><span class="hljs-function"><span class="hljs-keyword">function</span></span></span><span class="token punctuation" style="color:rgb(153,153,153);"><span class="hljs-function">(</span></span><span class="hljs-function"><span class="hljs-params">string</span></span><span class="token punctuation" style="color:rgb(153,153,153);"><span class="hljs-function"><span class="hljs-params">,</span></span></span><span class="hljs-function"><span class="hljs-params"> radix</span></span><span class="token punctuation" style="color:rgb(153,153,153);"><span class="hljs-function"><span class="hljs-params">,</span></span></span><span class="hljs-function"><span class="hljs-params"> obj</span></span><span class="token punctuation" style="color:rgb(153,153,153);"><span class="hljs-function">)</span></span><span class="hljs-function"> </span><span class="token punctuation" style="color:rgb(153,153,153);">&#123;</span></code></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="2"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><code class="language-javascript hljs" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;border:0px;word-spacing:normal;">    <span class="token keyword" style="color:rgb(0,119,170);"><span class="hljs-keyword">return</span></span> string <span class="token operator" style="color:rgb(166,127,89);">+</span> <span class="token string" style="color:rgb(102,153,0);"><span class="hljs-string">"-"</span></span> <span class="token operator" style="color:rgb(166,127,89);">+</span> radix <span class="token operator" style="color:rgb(166,127,89);">+</span> <span class="token string" style="color:rgb(102,153,0);"><span class="hljs-string">"-"</span></span> <span class="token operator" style="color:rgb(166,127,89);">+</span> obj<span class="token punctuation" style="color:rgb(153,153,153);">;</span></code></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="3"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><code class="language-javascript hljs" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;border:0px;word-spacing:normal;"><span class="token punctuation" style="color:rgb(153,153,153);">&#125;</span><span class="token punctuation" style="color:rgb(153,153,153);">;</span></code></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="4"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><code class="language-javascript hljs" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;border:0px;word-spacing:normal;"> </code></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="5"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><code class="language-javascript hljs" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;border:0px;word-spacing:normal;"><span class="token punctuation" style="color:rgb(153,153,153);">[</span><span class="token string" style="color:rgb(102,153,0);"><span class="hljs-string">"1"</span></span><span class="token punctuation" style="color:rgb(153,153,153);">,</span> <span class="token string" style="color:rgb(102,153,0);"><span class="hljs-string">"2"</span></span><span class="token punctuation" style="color:rgb(153,153,153);">,</span> <span class="token string" style="color:rgb(102,153,0);"><span class="hljs-string">"3"</span></span><span class="token punctuation" style="color:rgb(153,153,153);">]</span><span class="token punctuation" style="color:rgb(153,153,153);">.</span><span class="token function">map<span class="token punctuation" style="color:rgb(153,153,153);">(</span></span><span class="hljs-built_in">parseInt</span><span class="token punctuation" style="color:rgb(153,153,153);">)</span><span class="token punctuation" style="color:rgb(153,153,153);">;</span></code></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="6"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"></div></div></li></ol></code><div class="hljs-button signin" data-title="登录后复制" onclick="hljs.signin(event)"></div></pre>
+<p style="line-height:25px;color:rgb(85,85,85);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:14px;">
+输出结果：</p>
+<pre><code class="language-javascript hljs"><ol class="hljs-ln" style="width:1946px"><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="1"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><code class="language-javascript hljs" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;border:0px;word-spacing:normal;"><span class="token punctuation" style="color:rgb(153,153,153);">[</span><span class="token string" style="color:rgb(102,153,0);"><span class="hljs-string">"1-0-1,2,3"</span></span><span class="token punctuation" style="color:rgb(153,153,153);">,</span> <span class="token string" style="color:rgb(102,153,0);"><span class="hljs-string">"2-1-1,2,3"</span></span><span class="token punctuation" style="color:rgb(153,153,153);">,</span> <span class="token string" style="color:rgb(102,153,0);"><span class="hljs-string">"3-2-1,2,3"</span></span><span class="token punctuation" style="color:rgb(153,153,153);">]</span></code></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="2"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"></div></div></li></ol></code><div class="hljs-button signin" data-title="登录后复制" onclick="hljs.signin(event)"></div></pre>
+<p style="line-height:25px;color:rgb(85,85,85);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:14px;">
+我们再继续增加参数：</p>
+<pre><code class="language-javascript hljs"><ol class="hljs-ln" style="width:1946px"><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="1"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><code class="language-javascript hljs" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;border:0px;word-spacing:normal;"><span class="token keyword" style="color:rgb(0,119,170);"><span class="hljs-keyword">var</span></span> <span class="hljs-built_in">parseInt</span> <span class="token operator" style="color:rgb(166,127,89);">=</span> <span class="token keyword" style="color:rgb(0,119,170);"><span class="hljs-function"><span class="hljs-keyword">function</span></span></span><span class="token punctuation" style="color:rgb(153,153,153);"><span class="hljs-function">(</span></span><span class="hljs-function"><span class="hljs-params">string</span></span><span class="token punctuation" style="color:rgb(153,153,153);"><span class="hljs-function"><span class="hljs-params">,</span></span></span><span class="hljs-function"><span class="hljs-params"> radix</span></span><span class="token punctuation" style="color:rgb(153,153,153);"><span class="hljs-function"><span class="hljs-params">,</span></span></span><span class="hljs-function"><span class="hljs-params"> obj</span></span><span class="token punctuation" style="color:rgb(153,153,153);"><span class="hljs-function"><span class="hljs-params">,</span></span></span><span class="hljs-function"><span class="hljs-params"> other</span></span><span class="token punctuation" style="color:rgb(153,153,153);"><span class="hljs-function">)</span></span><span class="hljs-function"> </span><span class="token punctuation" style="color:rgb(153,153,153);">&#123;</span></code></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="2"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><code class="language-javascript hljs" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;border:0px;word-spacing:normal;">    <span class="token keyword" style="color:rgb(0,119,170);"><span class="hljs-keyword">return</span></span> string <span class="token operator" style="color:rgb(166,127,89);">+</span> <span class="token string" style="color:rgb(102,153,0);"><span class="hljs-string">"-"</span></span> <span class="token operator" style="color:rgb(166,127,89);">+</span> radix <span class="token operator" style="color:rgb(166,127,89);">+</span> <span class="token string" style="color:rgb(102,153,0);"><span class="hljs-string">"-"</span></span> <span class="token operator" style="color:rgb(166,127,89);">+</span> obj <span class="token operator" style="color:rgb(166,127,89);">+</span> <span class="token string" style="color:rgb(102,153,0);"><span class="hljs-string">"-"</span></span> <span class="token operator" style="color:rgb(166,127,89);">+</span> other<span class="token punctuation" style="color:rgb(153,153,153);">;</span></code></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="3"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><code class="language-javascript hljs" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;border:0px;word-spacing:normal;"><span class="token punctuation" style="color:rgb(153,153,153);">&#125;</span><span class="token punctuation" style="color:rgb(153,153,153);">;</span></code></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="4"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><code class="language-javascript hljs" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;border:0px;word-spacing:normal;"> </code></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="5"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><code class="language-javascript hljs" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;border:0px;word-spacing:normal;"><span class="token punctuation" style="color:rgb(153,153,153);">[</span><span class="token string" style="color:rgb(102,153,0);"><span class="hljs-string">"1"</span></span><span class="token punctuation" style="color:rgb(153,153,153);">,</span> <span class="token string" style="color:rgb(102,153,0);"><span class="hljs-string">"2"</span></span><span class="token punctuation" style="color:rgb(153,153,153);">,</span> <span class="token string" style="color:rgb(102,153,0);"><span class="hljs-string">"3"</span></span><span class="token punctuation" style="color:rgb(153,153,153);">]</span><span class="token punctuation" style="color:rgb(153,153,153);">.</span><span class="token function">map<span class="token punctuation" style="color:rgb(153,153,153);">(</span></span><span class="hljs-built_in">parseInt</span><span class="token punctuation" style="color:rgb(153,153,153);">)</span><span class="token punctuation" style="color:rgb(153,153,153);">;</span></code></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="6"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"></div></div></li></ol></code><div class="hljs-button signin" data-title="登录后复制" onclick="hljs.signin(event)"></div></pre>
+<p style="line-height:25px;color:rgb(85,85,85);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:14px;">
+输出结果：</p>
+<pre><code class="language-javascript hljs"><ol class="hljs-ln" style="width:1946px"><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="1"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><code class="language-javascript hljs" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;border:0px;word-spacing:normal;"><span class="token punctuation" style="color:rgb(153,153,153);">[</span><span class="token string" style="color:rgb(102,153,0);"><span class="hljs-string">"1-0-1,2,3-undefined"</span></span><span class="token punctuation" style="color:rgb(153,153,153);">,</span> <span class="token string" style="color:rgb(102,153,0);"><span class="hljs-string">"2-1-1,2,3-undefined"</span></span><span class="token punctuation" style="color:rgb(153,153,153);">,</span> <span class="token string" style="color:rgb(102,153,0);"><span class="hljs-string">"3-2-1,2,3-undefined"</span></span><span class="token punctuation" style="color:rgb(153,153,153);">]</span></code></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="2"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"></div></div></li></ol></code><div class="hljs-button signin" data-title="登录后复制" onclick="hljs.signin(event)"></div></pre>
+<p style="line-height:25px;color:rgb(85,85,85);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:14px;">
+第四个参数为&nbsp;<code class="language-javascript" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;color:rgb(221,17,68);border:1px solid rgb(225,225,232);word-spacing:normal;">undefined</code>，看见&nbsp;<code class="language-javascript" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;color:rgb(221,17,68);border:1px solid rgb(225,225,232);word-spacing:normal;">map</code>&nbsp;确实为&nbsp;<code class="language-javascript" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;color:rgb(221,17,68);border:1px solid rgb(225,225,232);word-spacing:normal;">parseInt</code>&nbsp;传递了三个参数。就像作者写道的：</p>
+<pre><code class="language-javascript hljs"><ol class="hljs-ln" style="width:1946px"><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="1"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><code class="language-javascript hljs" style="font-family:Consolas, Monaco, 'Andale Mono', monospace;font-size:12px;border:0px;word-spacing:normal;"><span class="token punctuation" style="color:rgb(153,153,153);">(</span>element<span class="token punctuation" style="color:rgb(153,153,153);">,</span> index<span class="token punctuation" style="color:rgb(153,153,153);">,</span> array<span class="token punctuation" style="color:rgb(153,153,153);">)</span></code></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="2"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"></div></div></li></ol></code><div class="hljs-button signin" data-title="登录后复制" onclick="hljs.signin(event)"></div></pre>
+<ol style="color:rgb(85,85,85);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:14px;line-height:25px;"><li style="line-height:20px;">
+<p style="line-height:25px;">数组的值</p>
+</li><li style="line-height:20px;">
+<p style="line-height:25px;">数组的索引</p>
+</li><li style="line-height:20px;">
+<p style="line-height:25px;">数组</p>
+</li></ol><p style="line-height:25px;color:rgb(85,85,85);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:14px;">
+（全文完）</p>
+
+</div>
+<p>转载于:https://www.cnblogs.com/lanzhi/p/6468023.html</p>                                    </div><div><div></div></div>
+                                </div>
+            </article>
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    
+                    <li class="next">
+                        <a href="/2020/05/01/前端进阶/" data-toggle="tooltip" data-placement="top"
+                           title="前端进阶">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+
+                <!--加入新的评论系统-->
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#cnblogs_post_body"><span class="toc-text">
+parseInt() 函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#cnblogs_post_body"><span class="toc-text">
+定义和用法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#cnblogs_post_body"><span class="toc-text">
+语法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#cnblogs_post_body"><span class="toc-text">
+返回值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cnblogs_post_body"><span class="toc-text">
+说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cnblogs_post_body"><span class="toc-text">
+提示和注释</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cnblogs_post_body"><span class="toc-text">
+实例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#cnblogs_post_body"><span class="toc-text">
+map 方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#cnblogs_post_body"><span class="toc-text">
+返回值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cnblogs_post_body"><span class="toc-text">
+异常</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cnblogs_post_body"><span class="toc-text">
+备注</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cnblogs_post_body"><span class="toc-text">
+回调函数语法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cnblogs_post_body"><span class="toc-text">
+修改数组对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cnblogs_post_body"><span class="toc-text">
+示例</span></a></li></ol></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; TYN 2020
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Theme by <a target="_blank" rel="noopener" href="https://haojen.github.io/">Haojen Ma</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/blog.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://shouzhiyo.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','','2.0.0');
+</script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="">
+</body>
+
+</html>
