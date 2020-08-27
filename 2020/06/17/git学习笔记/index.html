@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword" content="">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-person-128.png">
+    <link rel="alternate" type="application/atom+xml" title="TYN" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        git学习笔记｜undefined
+        
+    </title>
+
+    <link rel="canonical" href="http://shouzhiyo.github.io/2020/06/17/git学习笔记/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/blog-style.css">
+
+
+    <!-- Pygments Github CSS -->
+    
+<link rel="stylesheet" href="/css/syntax.css">
+
+<meta name="generator" content="Hexo 5.1.1"></head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    TYN
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>git学习笔记</h1>
+                    
+                    <span class="meta">
+                         作者 TYNpapa
+                        <span>
+                          日期 2020-06-17
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            git学习笔记
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <div id="article_content" class="article_content clearfix">
+            <link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/template/css/ck_htmledit_views-3d4dc5c1de.css">
+                            <div id="content_views" class="markdown_views prism-atom-one-dark">
+                    <!-- flowchart 箭头图标 勿删 -->
+                    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+                        <path stroke-linecap="round" d="M5,0 0,2.5 5,5z" id="raphael-marker-block" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+                    </svg>
+                                            <h2><a name="t0"></a><a name="t0"></a><a id="_1"></a>官网文档</h2>
+<p>https://guides.github.com/activities/hello-world/</p>
+<h2><a name="t1"></a><a name="t1"></a><a id="_4"></a>版本库介绍</h2>
+<p>工作区有一个隐藏目录 <strong>.git (执行git init 会生成)</strong>  ，这个不算工作区，而是Git的版本库。<br>
+<strong>Git的版本库</strong>里存了很多东西，其中最重要的就是称为 <strong>stage（或者叫index）</strong> 的暂存区，还有Git为我们自动创建的第一个分支 <strong>master</strong>，以及指向master的一个指针叫 <strong>HEAD</strong>。</p>
+<p><img src="https://img-blog.csdnimg.cn/20200817104207795.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NzZG5fZ2lybA==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<p><strong>git 的存储形式</strong>是对象，对象类型有三种：commit（是一个文件）、tree（是一个目录）、blob（是一个文件）。</p>
+<p><strong>.git 目录下几个关键目录：</strong><br>
+HEAD：文件，存放当前分支的索引，如ref: commit号<br>
+refs：文件夹，存放heads、remotes、tags，即所有分支和tags的相关信息。<br>
+config：文件，存放git的配置信息，如username、user.email。<br>
+objects：git 的对象（即三种对象类型）之间的关系。<br>
+通过命令修改等价于直接修改以上文件内容，都会生效。</p>
+<p><img src="https://img-blog.csdnimg.cn/20200817105312556.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NzZG5fZ2lybA==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>
+<strong>查看git管控的文件</strong><br>
+git cat-file -t [hash-id] ：查看 hash-id 对应的类型（三种）；<br>
+git cat-file -p [hash-id] ：查看 hash-id 对应的内容；<br>
+其中 [hash-id] 表示对象的唯一 hash标识。</p>
+<p><strong>gitk</strong>、<strong>sourceTree</strong>等 相当于 git log UI。</p>
+<p><strong>commit、tree、blob 三者之间的关系：</strong><br>
+<img src="https://img-blog.csdnimg.cn/20200817105550182.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NzZG5fZ2lybA==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<p><strong>分离头指针：</strong><br>
+HEAD 指向一个commit而非branch时，HEAD 的内容就是分离头指针。否则指向branch。<br>
+不要在HEAD指向分离头指针时修改提交内容，因为这样git会当作垃圾处理，一段时间后会清掉。要基于branch修改提交。</p>
+<h2><a name="t2"></a><a name="t2"></a><a id="_34"></a>常用命令</h2>
+<p><strong>修改commit message(注释)</strong></p>
+<ul>
+<li>修改当前commit message：<code>git commit --amend</code></li>
+<li>修改老的以前的commit message：<code>git rebase -i 【要修改的commit的父亲的commitid】</code>，即重新变基到父commit。<br>
+这里要修改一堆老commit message，则可以通过选择他们的父类批量修改。</li>
+</ul>
+<p><strong>合并多个commit</strong><br>
+合并多个连续commit：<code>git rebase - 【父commitid】</code> 再使用s命令<br>
+合并多个不连续commit：与连续的一样，只是要手动修改pick commit的顺序后，再使用s命令</p>
+<p><strong>删除commit/暂存区中文件</strong></p>
+<p><code>git rm 【文件名】</code><br>
+<code>git commit -m "delete 文件名"</code></p>
+<p><strong>暂存当前修改</strong><br>
+<code>git stash</code><br>
+<code>git stash apply</code>     --弹出stash中的内容，并保存stash的栈索引使可一直使用<br>
+<code>git stash pop</code>     --弹出stash中的内容，并删除stash的栈索引</p>
+<p><strong>Git恢复之前版本的两种方法:</strong><br>
+reset、revert。</p>
+<p>reset：<br>
+如果想恢复到之前某个提交的版本，且那个版本之后提交的版本我们都不要了，就可以用这种方法。<br>
+<code>git reset --hard 【目标版本号】</code></p>
+<p>revert：<br>
+如果我们想撤销之前的某一版本，但是又想保留该目标版本后面的版本，记录下这整个版本变动流程，就可以用这种方法。<br>
+<code>git revert -n 【目标版本号】</code><br>
+并使用<br>
+<code>git commit -m '添加注释'</code><br>
+提交。</p>
+<p>reset、revert（图文详解）：https://blog.csdn.net/yxlshk/article/details/79944535</p>
+<p><strong>回退代码</strong><br>
+<code>get reset --hard HEAD^</code>     重置stage区和工作区，即擦除整个commit的内容<br>
+<code>get reset --soft HEAD^</code>    保留工作目录，并将commit的内容放进stage区<br>
+<code>get reset --mixed HEAD^</code>    保留工作目录，并将commit的内容、stage区内容都放进工作区<br>
+<code>get reset HEAD^</code>    同 get reset --mixed HEAD^</p>
+<p>其中Git reset 三种模式详解： https://www.jianshu.com/p/c2ec5f06cf1a</p>
+<p><strong>备份</strong><br>
+clone：<br>
+克隆到本地，<br>
+<code>git clone 【远端仓库地址】</code></p>
+<p>fork：<br>
+复制别人的仓库到自己的远端仓库：<br>
+https://editor.csdn.net/md/?articleId=104010332<br>
+直接在 github 上操作 fork。</p>
+<p><strong>本地仓库与远端仓库建立关系</strong><br>
+<code>git remote add 【远端仓库别名】【远端仓库地址】</code></p>
+<p><strong>本地现有项目添加git追踪并推到已有仓库</strong>（一般为空仓库）<br>
+<code>cd existing-project</code><br>
+<code>git init</code><br>
+<code>git add --all</code><br>
+<code>git commit -m "Initial Commit"</code><br>
+<code>git remote add origin-name ssh://git@**</code>        注：一个项目至少关联一个远端git仓库地址<br>
+<code>git push origin-name master</code></p>
+<p><strong>本地现有被追踪项目要推送到其它origin仓库</strong><br>
+<code>cd existing-project</code><br>
+<code>git remote set-url origin ssh://git@**</code></p>
+<p><strong>远端仓库同步信息到本地仓库</strong><br>
+<code>git fetch【远端仓库别名】【远端仓库指定分支】</code> --拉取远端仓库指定分支代码<br>
+<code>git merge【远端仓库别名】【远端仓库指定分支</code>】–将从远端拉取后的代码合并到本地中<br>
+<code>git pull</code> 相当于 git fetch + git merge</p>
+<p><strong>本地commit强推到远端，会覆盖远端</strong><br>
+<code>git push -f origin master</code></p>
+<p><strong>git 三剑客</strong><br>
+git gitlab github</p>
+<p><strong>工作中补充</strong><br>
+链接：</p>
+<h2><a name="t3"></a><a name="t3"></a><a id="_117"></a>常见问题收集</h2>
+<h4><a id="_118"></a>问题一描述</h4>
+<p>执行 git push origin 时报错，如下：<br>
+<img src="https://img-blog.csdnimg.cn/20200604182558407.png" alt="在这里插入图片描述"></p>
+<h4><a id="_121"></a>解决办法</h4>
+<p>执行</p>
+<pre class="prettyprint"><code class="prism language-bash has-numbering" onclick="mdcp.signin(event)" style="position: unset;"><span class="token function">git</span> remote add code-na2 git@github.com:code-na2/mos-mss.git
+</div></code><ul class="pre-numbering"><li style="color: rgb(153, 153, 153);">1</li></ul></pre>
+<p>即发现远程仓库有问题，所以重新关联到新的远程仓库。</p>
+<h4><a id="_128"></a>解决过程</h4>
+<ol>
+<li>查看本地配置</li>
+</ol>
+<pre class="prettyprint"><code class="prism language-bash has-numbering" onclick="mdcp.signin(event)" style="position: unset;"><span class="token function">git</span> config -- list    查看当前项目下所有 <span class="token function">git</span> 相关配置
+</div></code><ul class="pre-numbering"><li style="color: rgb(153, 153, 153);">1</li></ul></pre>
+<p>配置结果：<br>
+<img src="https://img-blog.csdnimg.cn/20200604183204245.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NzZG5fZ2lybA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<pre class="prettyprint"><code class="prism language-bash has-numbering" onclick="mdcp.signin(event)" style="position: unset;">credential.helper<span class="token operator">=</span>osxkeychain
+user.name<span class="token operator">=</span>赵娜
+user.email<span class="token operator">=</span>zhaona12@meituan.com
+url.https://.insteadof<span class="token operator">=</span>git://
+url.git://.insteadof<span class="token operator">=</span>https://
+core.repositoryformatversion<span class="token operator">=</span>0
+core.filemode<span class="token operator">=</span>true
+core.bare<span class="token operator">=</span>false
+core.logallrefupdates<span class="token operator">=</span>true
+core.ignorecase<span class="token operator">=</span>true
+core.precomposeunicode<span class="token operator">=</span>true
+remote.origin.url<span class="token operator">=</span>https://github.com/gitna2/mos-mss.git
+remote.origin.fetch<span class="token operator">=</span>+refs/heads/*:refs/remotes/origin/*
+branch.master.remote<span class="token operator">=</span>origin
+branch.master.merge<span class="token operator">=</span>refs/heads/master
+branch.feature-5721399.remote<span class="token operator">=</span>origin
+branch.feature-5721399.merge<span class="token operator">=</span>refs/heads/master
+remote.upstream.url<span class="token operator">=</span>https://github.com/gitna2/mos-mss.git
+remote.upstream.fetch<span class="token operator">=</span>+refs/heads/*:refs/remotes/upstream/*
+</div></code><ul class="pre-numbering"><li style="color: rgb(153, 153, 153);">1</li><li style="color: rgb(153, 153, 153);">2</li><li style="color: rgb(153, 153, 153);">3</li><li style="color: rgb(153, 153, 153);">4</li><li style="color: rgb(153, 153, 153);">5</li><li style="color: rgb(153, 153, 153);">6</li><li style="color: rgb(153, 153, 153);">7</li><li style="color: rgb(153, 153, 153);">8</li><li style="color: rgb(153, 153, 153);">9</li><li style="color: rgb(153, 153, 153);">10</li><li style="color: rgb(153, 153, 153);">11</li><li style="color: rgb(153, 153, 153);">12</li><li style="color: rgb(153, 153, 153);">13</li><li style="color: rgb(153, 153, 153);">14</li><li style="color: rgb(153, 153, 153);">15</li><li style="color: rgb(153, 153, 153);">16</li><li style="color: rgb(153, 153, 153);">17</li><li style="color: rgb(153, 153, 153);">18</li><li style="color: rgb(153, 153, 153);">19</li></ul></pre>
+<p>即包含用户名、邮箱、所有关联的远程仓库 remote（这里是origin、upstream）、及对应仓库下分支。</p>
+<p>从结果发现远程仓库配置url有问题，故可删除现有错误配置，重新设置远程仓库。</p>
+<ol start="2">
+<li>重新关联现有远程仓库相关设置或直接新建一个远程配置</li>
+</ol>
+<p>先删除现有 origin 关联（直接新建远程配置时不用）：</p>
+<pre class="prettyprint"><code class="prism language-bash has-numbering" onclick="mdcp.signin(event)" style="position: unset;"><span class="token function">git</span> remote remove origin
+</code><ul class="pre-numbering"><li style="color: rgb(153, 153, 153);">1</li></ul></pre>
+<p>再添加新的远端仓库并设置别名，这里使用别名 code-na2：</p>
+<pre class="prettyprint"><code class="prism language-bash has-numbering" onclick="mdcp.signin(event)" style="position: unset;"><span class="token function">git</span> remote add code-na2 git@github.com:code-na2/mos-mss.git
+</div></code><ul class="pre-numbering"><li style="color: rgb(153, 153, 153);">1</li></ul></pre>
+<ol start="3">
+<li>查看本地仓库下 branch</li>
+</ol>
+<pre class="prettyprint"><code class="prism language-bash has-numbering" onclick="mdcp.signin(event)" style="position: unset;"><span class="token function">git</span> branch -r
+</div></code><ul class="pre-numbering"><li style="color: rgb(153, 153, 153);">1</li></ul></pre>
+<p>发现没有关联分支，所以要拉取代码：</p>
+<pre class="prettyprint"><code class="prism language-bash has-numbering" onclick="mdcp.signin(event)" style="position: unset;"><span class="token function">git</span> fetch code-na2
+</div></code><ul class="pre-numbering"><li style="color: rgb(153, 153, 153);">1</li></ul></pre>
+<p>这样，再执行：</p>
+<pre class="prettyprint"><code class="prism language-bash has-numbering" onclick="mdcp.signin(event)" style="position: unset;"><span class="token function">git</span> push origin feature-5721399
+</div></code><ul class="pre-numbering"><li style="color: rgb(153, 153, 153);">1</li></ul></pre>
+<p>就成功了<br>
+<img src="https://img-blog.csdnimg.cn/20200604184003726.png" alt="在这里插入图片描述"></p>
+<h4><a id="_189"></a>涉及关键命令</h4>
+<pre class="prettyprint"><code class="prism language-bash has-numbering" onclick="mdcp.signin(event)" style="position: unset;"><span class="token function">git</span> config -- list    查看当前项目下所有 <span class="token function">git</span> 相关配置
+<span class="token function">git</span> remote remove origin        删除现有远端仓库关联
+<span class="token function">git</span> remote add code-na2 git@github.com:code-na2/mos-mss.git    添加远端仓库关联
+<span class="token function">git</span> fetch code-na2        从远端拉去分支
+<span class="token function">git</span> branch -r        本地所有仓库下 branch
+</code><ul class="pre-numbering"><li style="color: rgb(153, 153, 153);">1</li><li style="color: rgb(153, 153, 153);">2</li><li style="color: rgb(153, 153, 153);">3</li><li style="color: rgb(153, 153, 153);">4</li><li style="color: rgb(153, 153, 153);">5</li></ul></pre>
+
+<pre><code>                                &lt;/div&gt;&lt;div&gt;&lt;div&gt;&lt;/div&gt;&lt;/div&gt;
+            &lt;link href=&quot;https://csdnimg.cn/release/phoenix/mdeditor/markdown_views-ff98e99283.css&quot; rel=&quot;stylesheet&quot;&gt;
+                            &lt;/div&gt;</code></pre>
+
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    
+                    <li class="next">
+                        <a href="/2020/06/04/ES6知识点汇总/" data-toggle="tooltip" data-placement="top"
+                           title="ES6知识点汇总">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+
+                <!--加入新的评论系统-->
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#content_views"><span class="toc-text">官网文档</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#content_views"><span class="toc-text">版本库介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#content_views"><span class="toc-text">常用命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#content_views"><span class="toc-text">常见问题收集</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#content_views"><span class="toc-text">问题一描述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#content_views"><span class="toc-text">解决办法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#article_content"><span class="toc-text">解决过程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">涉及关键命令</span></a></li></ol></li></ol></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; TYN 2020
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Theme by <a target="_blank" rel="noopener" href="https://haojen.github.io/">Haojen Ma</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/blog.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://shouzhiyo.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','','2.0.0');
+</script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="">
+</body>
+
+</html>
